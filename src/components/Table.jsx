@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -8,42 +9,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import Buttons from '../components/ButtonsEdition';
-
-const columns = [
-  { id: 'ChartType',
-    label: 'Tipo de grafico',
-    align: 'center',
-    minWidth: 170
-  },
-  { id: 'Title',
-    label: 'Titulo',
-    align: 'center',
-    minWidth: 100 
-  },
-  {
-    id: 'Time',
-    label: 'Tiempo',
-    minWidth: 170,
-    align: 'center',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'Edition',
-    label: 'Edicion',
-    minWidth: 170,
-    align: 'center',
-    format: (value) => value.toLocaleString('en-US'),
-  }
-];
-
-function createData(ChartType, Title, Time, Edition) {
-  return { ChartType, Title, Time, Edition };
-}
-
-const rows = [
-  createData('Barras, Pastel, Dona', 'Accidentes', 3, <Buttons /> ),
-];
+import Buttons from './ButtonsEdition';
 
 const useStyles = makeStyles({
   root: {
@@ -54,10 +20,32 @@ const useStyles = makeStyles({
   }
 });
 
-export default function StickyHeadTable() {
+const CustomTable = ({ rows: propRows, columns: propColumns, showEditionButtons }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  let rows = propRows
+  let columns = propColumns
+
+  if (showEditionButtons) {
+    rows = propRows.map((row) => {
+      return ({
+        ...row,
+        edition: <Buttons />
+      })
+    })
+
+    if (!columns.find(column => column.id === 'edition')) {
+      propColumns.push({
+        id: 'edition',
+        label: 'Edicion',
+        minWidth: 170,
+        align: 'center',
+      })
+
+      columns = propColumns
+    }
+  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -72,7 +60,7 @@ export default function StickyHeadTable() {
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table>
-          <TableHead  className="uppercase font-bold bg-eastern-blue-300">
+          <TableHead className="uppercase font-bold bg-eastern-blue-300">
             <TableRow >
               {columns.map((column) => (
                 <TableCell
@@ -86,9 +74,9 @@ export default function StickyHeadTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
@@ -104,7 +92,7 @@ export default function StickyHeadTable() {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={[5, 10, 25]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
@@ -115,3 +103,20 @@ export default function StickyHeadTable() {
     </Paper>
   );
 }
+
+CustomTable.defaultProps = {
+  showEditionButtons: true
+}
+
+CustomTable.propTypes = {
+  rows: PropTypes.instanceOf(Array).isRequired,
+  columns: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    align: PropTypes.string.isRequired,
+    minWidth: PropTypes.number.isRequired
+  })).isRequired,
+  showEditionButtons: PropTypes.bool
+}
+
+export default CustomTable;
