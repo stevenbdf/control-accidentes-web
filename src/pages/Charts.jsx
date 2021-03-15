@@ -1,6 +1,59 @@
 import Table from '../components/Table'
 import { NavLink } from "react-router-dom";
 
+const columns = [
+  {
+    id: 'chartType',
+    label: 'Tipo de grafico',
+    align: 'center',
+    minWidth: 170
+  },
+  {
+    id: 'title',
+    label: 'Titulo',
+    minWidth: 170,
+    align: 'center'
+  },
+  {
+    id: 'time',
+    label: 'Tiempo',
+    minWidth: 170,
+    align: 'center'
+  }
+];
+
+const rows = [
+  {
+    chartType: 'Pastel',
+    title: 'Grafica 1',
+    time: 3
+  }, 
+  {
+    chartType: 'Barras',
+    title: 'Grafica 2',
+    time: 4
+  },
+  {
+    chartType: 'Dona',
+    title: 'Grafica 3',
+    time: 5
+  },
+  {
+    chartType: 'Pastel, Dona',
+    title: 'Grafica 4',
+    time: 8
+  },
+  {
+    chartType: 'Barra, Pastel, Dona',
+    title: 'Grafica 5',
+    time: 1
+  },
+  {
+    chartType: 'Barra, Pastel, Dona, Pastel2',
+    title: 'Grafica 5',
+    time: 6
+  }
+];
 
 const Charts = () => {
   return (
@@ -16,7 +69,7 @@ const Charts = () => {
         </NavLink>
       </div>
       <div className="container mx-auto mt-4">
-        <Table />
+        <Table columns={columns} rows={rows} />
       </div>
     </div>
   )
