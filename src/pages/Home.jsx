@@ -1,7 +1,7 @@
 const Home = () => {
   return (
     <div className="flex space-x-2 mx-8">
-      <div className="w-6/12 h-120 border-2 border-gray-300 mt-12 flex flex-col items-center rounded-lg">
+      <div className="w-6/12  border-2 border-gray-300 mt-12 flex flex-col justify-center space-y-16 items-center rounded-lg">
         <div className="text-5xl font-semibold mt-8">Viernes, 5 de marzo de 2021</div>
         <div className="text-2xl mt-8">Actividad Eventos 2021</div>
         <div className="text-9xl font-bold my-16">63</div>

@@ -1,10 +1,12 @@
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome } from '@fortawesome/free-solid-svg-icons'
 
 
 const Navbar = () => {
   return (
-    <div className="w-full flex h-16 bg-eastern-blue-500 text-white font-bold justify-between">
-      <div className="flex space-x-12 items-center w-1/3 pl-8">
+    <div className="w-full flex h-16 md:w-full bg-eastern-blue-500 text-white font-bold justify-between">
+      <div className="flex space-x-12 items-center w-1/3 md:1/3 pl-8">
         <NavLink exact to="/configuration" activeClassName="text-2xl">
           <div>
             {/* Icono de fontAwesome : Gear */}
@@ -30,15 +32,15 @@ const Navbar = () => {
           </div>
         </NavLink>
       </div>
-      <div className="flex space-x-2 items-center w-1/3 justify-center">
-        <NavLink exact to="/" activeClassName="text-2xl">
+      <div className="flex space-x-2 items-center md:1/3 w-1/3 justify-center">
+        <NavLink exact to="/" activeClassName="text-3xl">
           <div>
             {/* Icono de fontAwesome : Home */}
-            Home
+            <FontAwesomeIcon icon={faHome}/>
           </div>
         </NavLink>
       </div>
-      <div className="flex space-x-8 items-center w-1/3 justify-end pr-8">
+      <div className="flex space-x-8 items-center w-1/3 md:1/3 justify-end pr-8">
         <NavLink exact to="/account">
           <div>
             {/* Icono de fontAwesome : SingleUser */}
