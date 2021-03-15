@@ -1,12 +1,15 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBuilding } from '@fortawesome/free-solid-svg-icons'
+
 const Login = () => {
   return (
     <div className=" flex justify-center items-center">
-      <form className=" w-4/12 border-4 border-eastern-blue-500 rounded-2xl flex flex-col mt-20 py-28 bg-top bg-cover" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1498335746477-0c73d7353a07?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=658&q=80')` }} >
+      <form className=" w-4/12 border-2 border-eastern-blue-500 rounded-2xl flex flex-col mt-20 py-28 bg-top bg-cover" >
         <div className="flex justify-center text-4xl font-semibold -mt-16 mb-16">
-          Name Company
+          Control de accidentes
         </div>
-        <div className="flex justify-center text-4xl font-semibold mb-20">
-          Logo
+        <div className="flex justify-center text-4xl font-semibold">
+          <FontAwesomeIcon className="text-8xl" icon={faBuilding} />
         </div>
         <div className="flex justify-center items-center flex-col mt-20">
           <div className="mr-2 text-xl font-bold pr-72">Usuario: </div>
