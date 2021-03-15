@@ -11,8 +11,8 @@ const Home = () => {
         <div className="mb-1">
           <img className="rounded-lg w-full h-96" src="https://images.unsplash.com/photo-1596386461350-326ccb383e9f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1001&q=80" alt=""/>
         </div>
-        <div>
-          <img className="rounded-lg w-full h-96" src="https://images.unsplash.com/photo-1543286386-713bdd548da4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt=""/>
+        <div className="w-full flex justify-center items-center">
+          <img className="rounded-lg h-96" src="/images/chart1.png" alt="" />
         </div>
       </div>
     </div>
