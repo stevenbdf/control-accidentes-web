@@ -1,61 +1,68 @@
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome } from '@fortawesome/free-solid-svg-icons'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import React from "react";
 
-
-const Navbar = () => {
+export default function Navbar({ fixed }) {
+  const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
-    <div className="w-full flex h-16 md:w-full bg-eastern-blue-500 text-white font-bold justify-between">
-      <div className="flex space-x-12 items-center w-1/3 md:1/3 pl-8">
-        <NavLink exact to="/configuration" activeClassName="text-2xl">
-          <div>
-            {/* Icono de fontAwesome : Gear */}
-            <p className="mr-3">Configuraciones</p>
+    <>
+      <nav className="relative flex flex-wrap items-center px-2 py-3 navbar-expand-lg bg-eastern-blue-500 mb-3">
+        <div className="container mx-auto px-4 flex flex-wrap items-center">
+          <div className="w-full relative flex justify-between xl:w-auto xl:static xl:block xl:justify-start">
+            <NavLink to="/">
+              <div className="text-lg font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap text-white">
+                Control de accidentes
+              </div>
+            </NavLink>
+            <button
+              className="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block xl:hidden outline-none focus:outline-none"
+              type="button"
+              onClick={() => setNavbarOpen(!navbarOpen)}
+            >
+              <FontAwesomeIcon icon={faBars} />
+            </button>
           </div>
-        </NavLink>
-        <NavLink exact to="/media" activeClassName="text-2xl">
-          <div>
-            {/* Icono de fontAwesome : Media*/}
-            <p className="mr-3">Multimedia</p>
+          <div
+            className={
+              "xl:flex flex-grow items-center" +
+              (navbarOpen ? " flex" : " hidden")
+            }
+            id="example-navbar-danger"
+          >
+            <ul className="flex flex-col xl:flex-row list-none lg:ml-auto">
+              <NavLink to="/configuration">
+                <li className="nav-item">
+                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
+                    <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Configuraciones</span>
+                  </div>
+                </li>
+              </NavLink>
+              <NavLink to="/media">
+                <li className="nav-item">
+                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
+                    <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Multimedia</span>
+                  </div>
+                </li>
+              </NavLink>
+              <NavLink to="/charts">
+                <li className="nav-item">
+                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
+                    <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Graficas</span>
+                  </div>
+                </li>
+              </NavLink>
+              <NavLink to="/users">
+                <li className="nav-item">
+                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
+                    <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Usuarios</span>
+                  </div>
+                </li>
+              </NavLink>
+            </ul>
           </div>
-        </NavLink>
-        <NavLink exact to="/charts" activeClassName="text-2xl">
-          <div>
-            {/* Icono de fontAwesome : Charts */}
-            <p className="mr-3">Graficas</p>
-          </div>
-        </NavLink>
-        <NavLink exact to="/users" activeClassName="text-2xl">
-          <div>
-            {/* Icono de fontAwesome : SomeUsers */}
-            <p className="mr-3">Usuarios</p>
-          </div>
-        </NavLink>
-      </div>
-      <div className="flex space-x-2 items-center md:1/3 w-1/3 justify-center">
-        <NavLink exact to="/" activeClassName="text-3xl">
-          <div>
-            {/* Icono de fontAwesome : Home */}
-            <FontAwesomeIcon icon={faHome}/>
-          </div>
-        </NavLink>
-      </div>
-      <div className="flex space-x-8 items-center w-1/3 md:1/3 justify-end pr-8">
-        <NavLink exact to="/account">
-          <div>
-            {/* Icono de fontAwesome : SingleUser */}
-            Cuenta
-          </div>
-        </NavLink>
-        <NavLink exact to="/logout">
-          <div>
-            {/* Icono de fontAwesome : PowerOff */}
-            Cerrar Sesion
-          </div>
-        </NavLink>
-      </div>
-    </div>
+        </div>
+      </nav>
+    </>
   );
 }
-
-export default Navbar;
