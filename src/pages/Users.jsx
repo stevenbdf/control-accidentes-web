@@ -1,6 +1,9 @@
 import Table from '../components/Table'
 import Modal from '../components/Modal'
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faPlus} from '@fortawesome/free-solid-svg-icons';
+
 
 const columns = [
   {
@@ -43,21 +46,21 @@ const Users = () => {
 
     <div className="mx-28">
       <Modal open={open} setOpen={setOpen}>
-        <h3 className="font-bold text-4xl mb-10">Agregar Usuario</h3>
+        <h3 className="font-bold text-4xl mb-10">Agregar usuario</h3>
         <div className="mx-8">
-          <div className="flex items-center mb-10">
+          <div className=" mb-10">
             <div className="text-xl font-semibold">
               Nombre:
           </div>
-            <div className="ml-2">
+            <div>
               <input className="py-1 xl:w-96 md:w-48 lg:w-80 px-4 focus:outline-none border-2 border-blue-500 rounded-lg" type="text" placeholder="Ingrese un nombre de usuario..." />
             </div>
           </div>
-          <div className="flex items-center mb-10">
-            <div className="text-xl font-semibold">
+          <div className="mb-10">
+            <div className=" text-xl font-semibold">
               Contraseña:
           </div>
-            <div className="ml-2">
+            <div>
               <input className="py-1 xl:w-96 md:w-40 lg:w-80 px-4 focus:outline-none border-2 border-blue-500 rounded-lg" type="password" placeholder="*************" />
             </div>
           </div>
@@ -74,10 +77,10 @@ const Users = () => {
             </div>
           </div>
           <div className="flex xl:justify-end md:justify-center">
-            <button className="bg-red-400 px-4 py-2 rounded-lg font-semibold text-lg focus:outline-none mr-6" onClick={() => {
+            <button className="bg-eastern-blue-500 text-white px-4 py-2 rounded-lg font-semibold text-lg focus:outline-none mr-6" onClick={() => {
               setOpen(false)
             }}>Cancelar</button>
-            <button className="bg-green-400 px-4 py-2 rounded-lg font-semibold text-lg focus:outline-none" onClick={() => {
+            <button className="bg-eastern-blue-500 text-white px-4 py-2 rounded-lg font-semibold text-lg focus:outline-none" onClick={() => {
               setOpen(false)
             }}>Aceptar</button>
           </div>
@@ -87,9 +90,10 @@ const Users = () => {
         Usuarios
       </div>
       <div className="flex justify-end mt-16">
-        <button className="px-4 py-2 bg-blue-600 rounded-lg mb-4 focus:outline-none text-white hover:text-black hover:bg-blue-400 transition-colors duration-300" onClick={() => {
+        <button className="px-4 py-2 bg-eastern-blue-500 rounded-lg mb-4 focus:outline-none text-white hover:text-black hover:bg-blue-400 transition-colors duration-300" onClick={() => {
           setOpen(true)
         }}>
+          <FontAwesomeIcon className="mr-2" icon={faPlus}/>
           Agregar
         </button>
       </div>

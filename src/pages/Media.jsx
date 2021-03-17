@@ -75,7 +75,7 @@ const Media = () => {
         </div>
         <div className="flex justify-center my-10">
           <button className="bg-eastern-blue-400 text-2xl rounded-lg font-bold
-          text-black focus:outline-none hover:bg-eastern-blue-800 hover:text-white
+          text-white focus:outline-none hover:bg-eastern-blue-800
             transition-colors duration-300 px-6 py-3">
             Seleccionar Multimedia
           </button>

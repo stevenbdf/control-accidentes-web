@@ -36,7 +36,7 @@ const Config = () => {
           <Switch />
         </div>
         <div className="flex justify-end mr-4">
-          <button className="px-4 py-2 bg-blue-600 rounded-lg mb-4 focus:outline-none text-white hover:text-black hover:bg-blue-400 transition-colors duration-300 " onClick={() => {
+          <button className="px-4 py-2 bg-eastern-blue-500  rounded-lg mb-4 focus:outline-none text-white hover:text-black hover:bg-blue-400 transition-colors duration-300 " onClick={() => {
             setOpen(true)
           }}>
             <FontAwesomeIcon icon={faSave} className="mr-2" /> Guardar
@@ -62,7 +62,7 @@ const Config = () => {
           </div>
         </div>
         <div className="flex justify-end mr-4">
-          <button className="px-4 py-2 bg-blue-600 rounded-lg mb-4 focus:outline-none text-white hover:text-black hover:bg-blue-400 transition-colors duration-300 " onClick={() => {
+          <button className="px-4 py-2 bg-eastern-blue-500 rounded-lg mb-4 focus:outline-none text-white hover:text-black hover:bg-blue-400 transition-colors duration-300 " onClick={() => {
             setOpen(true)
           }}>
             <FontAwesomeIcon icon={faSave} className="mr-2" /> Guardar

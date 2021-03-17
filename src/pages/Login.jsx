@@ -20,7 +20,7 @@ const Login = () => {
           <input className="pr-36 pl-4 py-2 border-2 w-96 rounded-lg border-blue-600 focus:outline-none" placeholder="Contraseña..." type="text"/>
         </div>
         <div className="flex justify-center">
-          <button className="mt-16 w-96 bg-blue-600 hover:bg-blue-400 text-white transition-colors duration-300 hover:text-black px-8 focus:outline-none py-3 rounded-lg">
+          <button className="mt-16 w-96 bg-eastern-blue-500 text-white transition-colors duration-300 hover:text-black px-8 focus:outline-none py-3 rounded-lg">
             Ingresar
           </button>
         </div>
