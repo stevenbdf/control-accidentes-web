@@ -70,11 +70,11 @@ const Charts = () => {
         <h3 className="font-bold text-4xl mb-10">Agregar Grafico</h3>
         <div className="mx-8">
           <div className="mb-10">
-            <div className=" text-xl font-semibold">
+            <div className=" text-xl font-semibold mb-2">
               Nombre:
           </div>
             <div>
-              <input className="py-1  w-full px-4 focus:outline-none border-2 border-blue-500 rounded-lg" type="text" placeholder="Ingrese un titulo..." />
+              <input className="py-1 w-full px-4 focus:outline-none border-2 border-blue-500 rounded-lg" type="text" placeholder="Ingrese un titulo..." />
             </div>
           </div>
           <div className="mb-10">

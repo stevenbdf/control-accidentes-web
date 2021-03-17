@@ -33,7 +33,7 @@ export default function TransitionsModal({open, setOpen, children}) {
         }}
       >
         <Fade in={open}>
-          <div className="w-4/12 md:w-6/12 bg-white p-10 focus:outline-none rounded-lg">
+          <div className="w-4/12 bg-white p-10 focus:outline-none rounded-lg">
             {children}
           </div>
         </Fade>

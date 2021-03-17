@@ -57,7 +57,7 @@ const Users = () => {
             </div>
           </div>
           <div className="mb-10">
-            <div className=" text-xl font-semibold">
+            <div className=" text-xl mb-2 font-semibold">
               Contraseña:
           </div>
             <div>
@@ -65,7 +65,7 @@ const Users = () => {
             </div>
           </div>
           <div className="flex items-center mb-10">
-            <div className="text-xl font-semibold">
+            <div className="text-xl mb-2 font-semibold">
               Tipo de Usuario:
             </div>
             <div className="ml-2">
