@@ -24,7 +24,6 @@ const Login = () => {
             Ingresar
           </button>
         </div>
-        
       </form>
     </div>
   );
