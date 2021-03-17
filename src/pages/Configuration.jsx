@@ -1,9 +1,30 @@
 import Switch from "../components/Switch"
-import Button from "../components/Button"
+import Modal from '../components/Modal'
+import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSave } from '@fortawesome/free-solid-svg-icons'
 
 const Config = () => {
+
+  const [open, setOpen] = React.useState(false);
   return (
+
     <div className="mx-16">
+      <Modal open={open} setOpen={setOpen}>
+        <div className="flex justify-center items-center flex-col">
+          <h3 className="font-bold text-2xl mb-10">¿Desea mostrar esta seleccion?</h3>
+          <div className="flex items-center mb-5">
+            <div className="flex justify-end">
+              <button className="bg-red-400 px-4 py-2 rounded-lg font-semibold text-lg focus:outline-none mr-6" onClick={() => {
+                setOpen(false)
+              }}>Cancelar</button>
+              <button className="bg-green-400 px-4 py-2 rounded-lg font-semibold text-lg focus:outline-none" onClick={() => {
+                setOpen(false)
+              }}>Aceptar</button>
+            </div>
+          </div>
+        </div>
+      </Modal>
       <div className="text-4xl font-extrabold pt-12">
         Configuraciones
       </div>
@@ -14,11 +35,15 @@ const Config = () => {
         <div className="w-full px-56">
           <Switch />
         </div>
-        <div>
-          <Button />
+        <div className="flex justify-end mr-4">
+          <button className="px-4 py-2 bg-blue-600 rounded-lg mb-4 focus:outline-none text-white hover:text-black hover:bg-blue-400 transition-colors duration-300 " onClick={() => {
+            setOpen(true)
+          }}>
+            <FontAwesomeIcon icon={faSave} className="mr-2" /> Guardar
+          </button>
         </div>
       </div>
-      <div className="border-2 border-blue-400 mt-16 space-y-8 rounded-lg md:flex md:flex-col">
+      <div className="border-2 border-blue-400 mt-16 space-y-8 rounded-lg md:flex md:flex-col mb-12">
         <div className="text-2xl pl-12 pt-4 font-bold">
           Informacion general
         </div>
@@ -36,7 +61,14 @@ const Config = () => {
             <textarea placeholder="Escriba aqui su texto marquesina" className="xl:-ml-14 2xl:mb-6  border-2 px-4 py-2 border-blue-600 rounded-lg" name="" id="" cols="70" rows="4"></textarea>
           </div>
         </div>
-        <Button />
+        <div className="flex justify-end mr-4">
+          <button className="px-4 py-2 bg-blue-600 rounded-lg mb-4 focus:outline-none text-white hover:text-black hover:bg-blue-400 transition-colors duration-300 " onClick={() => {
+            setOpen(true)
+          }}>
+            <FontAwesomeIcon icon={faSave} className="mr-2" /> Guardar
+          </button>
+        </div>
+
       </div>
     </div>
   )

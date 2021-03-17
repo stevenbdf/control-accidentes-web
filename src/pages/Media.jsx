@@ -81,12 +81,12 @@ const Media = () => {
           </button>
         </div>
       </div>
-      <div className="w-full border-2 border-blue-400 mt-10 rounded-lg">
+      <div className="w-full border-2 border-blue-400 mt-10 rounded-lg mb-12">
         <div className="text-xl pl-12 pt-4 font-bold">
           Almacenar archivos (fotos, videos)
         </div>
-        <div className="flex justify-center">
-          <div className="w-6/12 border-2 border-blue-400 mt-10 mb-8 rounded-lg flex divide-x-4 divide-solid divide-black">
+        <div className="flex justify-center ">
+          <div className="w-6/12 border-2 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:w-8/12 border-blue-400 mt-10 mb-8 rounded-lg flex divide-x-4 divide-solid divide-black">
             <div className="w-1/2 flex flex-col items-center my-10">
               <button className="focus:outline-none" onClick={() => { uploadInput.current.click() }}>
                 <FontAwesomeIcon className="text-8xl " icon={faUpload} />

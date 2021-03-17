@@ -4,7 +4,7 @@ import { faBuilding } from '@fortawesome/free-solid-svg-icons'
 const Login = () => {
   return (
     <div className=" flex justify-center items-center">
-      <form className=" w-4/12 border-2 border-eastern-blue-500 rounded-2xl flex flex-col mt-20 py-28 bg-top bg-cover" >
+      <form className=" w-4/12 md:w-8/12 lg:w-6/12 xl:w-4/12 border-2 border-eastern-blue-500 rounded-2xl flex flex-col mt-20 py-28 bg-top bg-cover" >
         <div className="flex justify-center text-4xl font-semibold -mt-16 mb-16">
           Control de accidentes
         </div>
