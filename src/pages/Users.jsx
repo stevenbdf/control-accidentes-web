@@ -53,7 +53,7 @@ const Users = () => {
               Nombre:
           </div>
             <div>
-              <input className="py-1 xl:w-96 md:w-48 lg:w-80 px-4 focus:outline-none border-2 border-blue-500 rounded-lg" type="text" placeholder="Ingrese un nombre de usuario..." />
+              <input className="py-1 w-full px-4 focus:outline-none border-2 border-blue-500 rounded-lg" type="text" placeholder="Ingrese un nombre de usuario..." />
             </div>
           </div>
           <div className="mb-10">
@@ -61,7 +61,7 @@ const Users = () => {
               Contraseña:
           </div>
             <div>
-              <input className="py-1 xl:w-96 md:w-40 lg:w-80 px-4 focus:outline-none border-2 border-blue-500 rounded-lg" type="password" placeholder="*************" />
+              <input className="py-1 w-full px-4 focus:outline-none border-2 border-blue-500 rounded-lg" type="password" placeholder="*************" />
             </div>
           </div>
           <div className="flex items-center mb-10">

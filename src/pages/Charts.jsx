@@ -70,19 +70,19 @@ const Charts = () => {
         <h3 className="font-bold text-4xl mb-10">Agregar Grafico</h3>
         <div className="mx-8">
           <div className="mb-10">
-            <div className="text-xl font-semibold">
+            <div className=" text-xl font-semibold">
               Nombre:
           </div>
             <div>
-              <input className="py-1 xl:w-96 md:w-40 lg:w-80 px-4 focus:outline-none border-2 border-blue-500 rounded-lg" type="text" placeholder="Ingrese un titulo..." />
+              <input className="py-1  w-full px-4 focus:outline-none border-2 border-blue-500 rounded-lg" type="text" placeholder="Ingrese un titulo..." />
             </div>
           </div>
-          <div className="flex items-center mb-10">
-            <div className="text-xl font-semibold">
+          <div className="mb-10">
+            <div className="text-xl mb-2 font-semibold">
               Tipo de grafico:
             </div>
-            <div className="ml-2">
-              <select name="" id="" className="px-8 rounded-lg border-2 border-blue-500 focus:outline-none py-2">
+            <div >
+              <select name="" id="" className="px-8 rounded-lg border-2 border-blue-500 w-full focus:outline-none py-2">
                 <option value="1">Pastel</option>
                 <option value="2">Barras</option>
                 <option value="3">Lineal</option>
@@ -110,7 +110,7 @@ const Charts = () => {
         <button className=" px-4 py-2 bg-eastern-blue-500 rounded-lg mb-4 focus:outline-none text-white hover:text-black hover:bg-blue-400 transition-colors duration-300" onClick={() => {
           setOpen(true)
         }}>
-          <FontAwesomeIcon className="mr-2" icon={faPlus}/>
+          <FontAwesomeIcon className="mr-2" icon={faPlus} />
           Agregar
         </button>
       </div>
