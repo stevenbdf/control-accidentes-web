@@ -39,6 +39,10 @@ export const me = () => async (dispatch) => {
       payload: data,
     });
   } catch (error) {
-    // AuthService.logout();
+    console.log(error);
   }
+};
+
+export const logout = () => {
+  AuthService.logout();
 };
