@@ -23,7 +23,6 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'import/prefer-default-export': 'off',
     'no-console': 'off',
-    camelcase: 'off',
     'linebreak-style': 0,
     'max-len': ['error', { code: 180 }],
     // 'react/prop-types': [2, { ignore: ['children'] }],
