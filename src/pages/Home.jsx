@@ -64,6 +64,35 @@ const Home = () => {
                         config.display_media
                         && (
                           <div className="w-full flex items-center justify-center" style={{ height: config.display_charts ? '45vh' : '49.5vh' }}>
+                            {/* Static image media */}
+                            {
+                              config.media_id === '1'
+                              && (
+                                <div className="w-full h-full flex items-center justify-center">
+                                  <img
+                                    style={{ maxWidth: '100%', maxHeight: '100%' }}
+                                    src={config.media.files[0].url}
+                                    alt={config.media.files[0].name}
+                                  />
+                                </div>
+                              )
+                            }
+                            {
+                              config.media_id === '2'
+                              && (
+                                <div className="w-full h-full flex items-center justify-center">
+                                  <video className="h-full" src={config.media.files[0].url} autoPlay loop>
+                                    <track
+                                      default
+                                      kind="captions"
+                                      srcLang="es"
+                                      src={config.media.files[0].url}
+                                    />
+                                    Lo sentimos, su navegador no soporta videos
+                                  </video>
+                                </div>
+                              )
+                            }
                             {
                               config.media_id === '3'
                               && <Carousel images={config.media.files.map(({ name, url }) => ({ name, url }))} />
