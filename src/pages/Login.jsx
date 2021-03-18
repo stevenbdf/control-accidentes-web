@@ -1,20 +1,32 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import Checkbox from '@material-ui/core/Checkbox';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Redirect } from 'react-router-dom';
 import { login } from '../store/user/actions';
 import validator from '../helpers/validator';
+import TokenService from '../services/core/TokenService';
 
 const Login = () => {
+  const isLoading = useSelector((state) => state.user.isLoading);
+  const user = useSelector((state) => state.user.user);
+
   const {
     register, handleSubmit, errors,
   } = useForm({ mode: 'onChange' });
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    dispatch(login(data));
+    if (!isLoading) {
+      dispatch(login(data));
+    }
   };
+
+  if (TokenService.getToken() || user?.id) {
+    return <Redirect to="/configuration" />;
+  }
 
   return (
     <div className=" flex justify-center items-center">
@@ -60,12 +72,24 @@ const Login = () => {
           <p className="font-semibold pr-68 mr-4">Recuerdame</p>
         </div>
         <div className="flex justify-center">
-          <button
-            type="submit"
-            className="mt-16 w-96 font-bold bg-eastern-blue-500 text-white transition-colors duration-300 hover:text-black px-8 focus:outline-none py-3 rounded-lg"
-          >
-            Ingresar
-          </button>
+          {
+            isLoading
+              ? (
+                <div
+                  className="mt-16 w-96 flex justify-center"
+                >
+                  <CircularProgress />
+                </div>
+              )
+              : (
+                <button
+                  type="submit"
+                  className="mt-16 w-96 font-bold bg-eastern-blue-500 text-white transition-colors duration-300 hover:text-black px-8 focus:outline-none py-3 rounded-lg"
+                >
+                  Ingresar
+                </button>
+              )
+          }
         </div>
       </form>
     </div>
