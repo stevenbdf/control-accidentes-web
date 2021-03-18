@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { Bar } from 'react-chartjs-2';
 import { show } from '../store/config/actions';
 import { getTodayDate, formatDate, dateDiffInDays } from '../helpers/utilities';
 import Carousel from '../components/Carousel';
@@ -103,8 +104,35 @@ const Home = () => {
                       {
                         config.display_charts
                         && (
-                          <div className="w-full flex items-center justify-center" style={{ height: config.display_media ? '45vh' : '49.5vh' }}>
-                            <img className="rounded-lg max-h-full" src="/images/chart1.png" alt="" />
+                          <div className="w-full flex items-center justify-center p-5" style={{ height: config.display_media ? '45vh' : '49.5vh' }}>
+                            <Bar
+                              data={{
+                                labels: ['a', 'b'],
+                                datasets: [
+                                  {
+                                    label: 'Bar - Set 1',
+                                    fillColor: 'rgba(220,220,220,0.5)',
+                                    strokeColor: 'rgba(220,220,220,0.8)',
+                                    highlightFill: 'rgba(220,220,220,0.75)',
+                                    highlightStroke: 'rgba(220,220,220,1)',
+                                    data: [65, 34],
+                                    backgroundColor: ['#AF32', 'blue', 'green', 'blue', 'red', 'blue'],
+                                  },
+                                ],
+                              }}
+                              options={{
+                                maintainAspectRatio: false,
+                                title: {
+                                  display: true,
+                                  text: 'Average Rainfall per month',
+                                  fontSize: 20,
+                                },
+                                legend: {
+                                  display: false,
+                                  position: 'right',
+                                },
+                              }}
+                            />
                           </div>
                         )
                       }
