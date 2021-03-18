@@ -13,6 +13,11 @@ export const user = (state = initialState, action) => {
         ...state,
         isLoading: action.payload,
       };
+    case types.SET_USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
     default:
       return state;
   }
