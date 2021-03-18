@@ -11,6 +11,7 @@ import Config from './pages/Configuration'
 import Media from './pages/Media'
 import Charts from './pages/Charts'
 import Users from './pages/Users'
+import Account from './pages/Account'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route component={Media} exact path="/media" />
           <Route component={Charts} exact path="/charts" />
           <Route component={Users} exact path="/users" />
+          <Route component={Account} exact path="/account" />
         </Switch>
       </div>
     </Router >

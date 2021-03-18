@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faChartBar, faCog, faImage, faPowerOff, faUser, faUsers } from '@fortawesome/free-solid-svg-icons'
 import React from "react";
 
 export default function Navbar({ fixed }) {
@@ -30,10 +30,11 @@ export default function Navbar({ fixed }) {
             }
             id="example-navbar-danger"
           >
-            <ul className="flex flex-col xl:flex-row list-none lg:ml-auto">
+            <ul className="flex flex-col xl:flex-row list-none lg:ml-auto space-x-6">
               <NavLink to="/configuration">
                 <li className="nav-item">
                   <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
+                    <FontAwesomeIcon icon={faCog} />
                     <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Configuraciones</span>
                   </div>
                 </li>
@@ -41,6 +42,7 @@ export default function Navbar({ fixed }) {
               <NavLink to="/media">
                 <li className="nav-item">
                   <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
+                    <FontAwesomeIcon icon={faImage} />
                     <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Multimedia</span>
                   </div>
                 </li>
@@ -48,6 +50,7 @@ export default function Navbar({ fixed }) {
               <NavLink to="/charts">
                 <li className="nav-item">
                   <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
+                    <FontAwesomeIcon icon={faChartBar} />
                     <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Graficas</span>
                   </div>
                 </li>
@@ -55,7 +58,24 @@ export default function Navbar({ fixed }) {
               <NavLink to="/users">
                 <li className="nav-item">
                   <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
+                    <FontAwesomeIcon icon={faUsers} />
                     <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Usuarios</span>
+                  </div>
+                </li>
+              </NavLink>
+              <NavLink to="/account">
+                <li className="nav-item">
+                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
+                    <FontAwesomeIcon icon={faUser} />
+                    <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Cuenta</span>
+                  </div>
+                </li>
+              </NavLink>
+              <NavLink to="/login">
+                <li className="nav-item">
+                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
+                    <FontAwesomeIcon icon={faPowerOff} />
+                    <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Cerrar Sesion</span>
                   </div>
                 </li>
               </NavLink>
