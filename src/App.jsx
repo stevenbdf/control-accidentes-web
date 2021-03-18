@@ -15,7 +15,6 @@ import Users from './pages/Users';
 import Account from './pages/Account';
 import TokenService from './services/core/TokenService';
 import PrivateRoute from './components/PrivateRoute';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 function App() {
   const user = useSelector((state) => state.user.user);

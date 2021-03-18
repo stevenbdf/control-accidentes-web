@@ -1,4 +1,3 @@
-// import { Carousel } from 'react-responsive-carousel';
 import { useState, useEffect } from 'react';
 import Proptypes from 'prop-types';
 
@@ -32,7 +31,7 @@ const CustomCarousel = ({ images, speed }) => {
 };
 
 CustomCarousel.defaultProps = {
-  speed: 3000,
+  speed: 5000,
 };
 
 CustomCarousel.propTypes = {
