@@ -7,7 +7,7 @@ export default function SwitchLabels() {
   const [state, setState] = React.useState({
     checkedA: true,
     checkedB: true,
-    checkedC: true
+    checkedC: true,
   });
 
   const handleChange = (event) => {
@@ -17,38 +17,38 @@ export default function SwitchLabels() {
   return (
     <FormGroup row className="flex justify-between">
       <FormControlLabel
-        control={
+        control={(
           <Switch
             checked={state.checkedA}
             onChange={handleChange}
-            name="checkedA" 
+            name="checkedA"
             color="primary"
-            />
-          }
-            label="Graficos"
+          />
+        )}
+        label="Graficos"
       />
       <FormControlLabel
-        control={
+        control={(
           <Switch
             checked={state.checkedB}
             onChange={handleChange}
             name="checkedB"
             color="primary"
           />
-        }
+        )}
         label="Multimedia"
       />
       <FormControlLabel
-        control={
-        <Switch 
-        checked={state.checkedC} 
-        onChange={handleChange} 
-        name="checkedC" 
-        color="primary"
+        control={(
+          <Switch
+            checked={state.checkedC}
+            onChange={handleChange}
+            name="checkedC"
+            color="primary"
+          />
+        )}
+        label="Graficos"
       />
-      }
-      label="Graficos"
-    />
     </FormGroup>
   );
 }

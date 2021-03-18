@@ -1,12 +1,12 @@
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { user } from './user/reducer'
+import { user } from './user/reducer';
 
 const store = createStore(
   combineReducers({
-    user
+    user,
   }),
-  composeWithDevTools()
+  composeWithDevTools(),
 );
 
 export default store;

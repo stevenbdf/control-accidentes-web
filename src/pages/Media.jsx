@@ -1,8 +1,10 @@
-import React from 'react'
-import Modal from '../components/Modal'
+import React from 'react';
 import Radio from '@material-ui/core/Radio';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCamera, faVideo, faImages, faUpload, faLink } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCamera, faVideo, faImages, faUpload, faLink,
+} from '@fortawesome/free-solid-svg-icons';
+import Modal from '../components/Modal';
 
 const Media = () => {
   const [selectedValue, setSelectedValue] = React.useState('a');
@@ -11,10 +13,10 @@ const Media = () => {
     setSelectedValue(event.target.value);
   };
 
-  const [fileName, setFileName] = React.useState('No ha seleccionado ningun archivo')
+  const [fileName, setFileName] = React.useState('No ha seleccionado ningun archivo');
   const uploadInput = React.createRef();
 
-  const handleFileUpload = event => {
+  const handleFileUpload = (event) => {
     setFileName(event.target.files[0].name);
   };
 
@@ -26,12 +28,19 @@ const Media = () => {
         <h3 className="font-bold text-2xl mb-5">Subir URL</h3>
         <div className="flex items-center mb-5">
           <div className="mr-5">URL:</div>
-          <input className="w-full px-4 py-2 border-2 border-blue-500 rounded-lg" type="text" placeholder="Ingrese una URL..."/>
+          <input className="w-full px-4 py-2 border-2 border-blue-500 rounded-lg" type="text" placeholder="Ingrese una URL..." />
         </div>
         <div className="flex justify-end">
-          <button className="bg-green-400 px-4 py-2 rounded-lg font-semibold text-lg focus:outline-none" onClick={()=>{
-            setOpen(false)
-          }}>Aceptar</button>
+          <button
+            type="button"
+            className="bg-green-400 px-4 py-2 rounded-lg font-semibold text-lg focus:outline-none"
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            Aceptar
+
+          </button>
         </div>
       </Modal>
       <div className="text-4xl font-extrabold pt-12">
@@ -74,9 +83,12 @@ const Media = () => {
           </div>
         </div>
         <div className="flex justify-center my-10">
-          <button className="bg-eastern-blue-400 text-2xl rounded-lg font-bold
+          <button
+            type="button"
+            className="bg-eastern-blue-400 text-2xl rounded-lg font-bold
           text-white focus:outline-none hover:bg-eastern-blue-800
-            transition-colors duration-300 px-6 py-3">
+            transition-colors duration-300 px-6 py-3"
+          >
             Seleccionar Multimedia
           </button>
         </div>
@@ -88,24 +100,32 @@ const Media = () => {
         <div className="flex justify-center ">
           <div className="w-6/12 border-2 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:w-8/12 border-blue-400 mt-10 mb-8 rounded-lg flex divide-x-4 divide-solid divide-black">
             <div className="w-1/2 flex flex-col items-center my-10">
-              <button className="focus:outline-none" onClick={() => { uploadInput.current.click() }}>
+              <button
+                type="button"
+                className="focus:outline-none"
+                onClick={() => { uploadInput.current.click(); }}
+              >
                 <FontAwesomeIcon className="text-8xl " icon={faUpload} />
               </button>
-              <div className=" mt-4 font-bold text-xl" >
+              <div className=" mt-4 font-bold text-xl">
                 <input
                   ref={uploadInput}
                   onChange={handleFileUpload}
                   type="file"
-                  style={{ display: "none" }}
+                  style={{ display: 'none' }}
                 // multiple={false}
                 />
-                {fileName || "Subir archivo"}
+                {fileName || 'Subir archivo'}
               </div>
             </div>
             <div className="w-1/2 flex flex-col items-center my-10">
-              <button className="focus:outline-none" onClick={() => {
-                setOpen(true)
-              }}>
+              <button
+                type="button"
+                className="focus:outline-none"
+                onClick={() => {
+                  setOpen(true);
+                }}
+              >
                 <FontAwesomeIcon className="text-8xl" icon={faLink} />
               </button>
               <div className="text-xl mt-4 font-bold">
@@ -116,7 +136,7 @@ const Media = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Media;

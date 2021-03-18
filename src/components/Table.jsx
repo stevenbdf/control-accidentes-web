@@ -17,33 +17,31 @@ const useStyles = makeStyles({
   },
   container: {
     maxHeight: 440,
-  }
+  },
 });
 
 const CustomTable = ({ rows: propRows, columns: propColumns, showEditionButtons }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  let rows = propRows
-  let columns = propColumns
+  let rows = propRows;
+  let columns = propColumns;
 
   if (showEditionButtons) {
-    rows = propRows.map((row) => {
-      return ({
-        ...row,
-        edition: <Buttons />
-      })
-    })
+    rows = propRows.map((row) => ({
+      ...row,
+      edition: <Buttons />,
+    }));
 
-    if (!columns.find(column => column.id === 'edition')) {
+    if (!columns.find((column) => column.id === 'edition')) {
       propColumns.push({
         id: 'edition',
         label: 'Edicion',
         minWidth: 170,
         align: 'center',
-      })
+      });
 
-      columns = propColumns
+      columns = propColumns;
     }
   }
 
@@ -61,7 +59,7 @@ const CustomTable = ({ rows: propRows, columns: propColumns, showEditionButtons 
       <TableContainer className={classes.container}>
         <Table>
           <TableHead className="uppercase font-bold bg-eastern-blue-300">
-            <TableRow >
+            <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
@@ -74,20 +72,19 @@ const CustomTable = ({ rows: propRows, columns: propColumns, showEditionButtons 
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                {columns.map((column) => {
+                  const value = row[column.id];
+                  return (
+                    <TableCell key={column.id} align={column.align}>
+                      {column.format && typeof value === 'number' ? column.format(value) : value}
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
@@ -102,11 +99,11 @@ const CustomTable = ({ rows: propRows, columns: propColumns, showEditionButtons 
       />
     </Paper>
   );
-}
+};
 
 CustomTable.defaultProps = {
-  showEditionButtons: true
-}
+  showEditionButtons: true,
+};
 
 CustomTable.propTypes = {
   rows: PropTypes.instanceOf(Array).isRequired,
@@ -114,9 +111,9 @@ CustomTable.propTypes = {
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     align: PropTypes.string.isRequired,
-    minWidth: PropTypes.number.isRequired
+    minWidth: PropTypes.number.isRequired,
   })).isRequired,
-  showEditionButtons: PropTypes.bool
-}
+  showEditionButtons: PropTypes.bool,
+};
 
 export default CustomTable;

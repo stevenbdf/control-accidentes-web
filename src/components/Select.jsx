@@ -47,9 +47,9 @@ export default function ControlledOpenSelect() {
           value={age}
           onChange={handleChange}
         >
-          <MenuItem value={"pastel"}>Grafica de pastel</MenuItem>
-          <MenuItem value={"barras"}>Grafica de barras</MenuItem>
-          <MenuItem value={"lineal"}>Grafica lineal</MenuItem>
+          <MenuItem value="pastel">Grafica de pastel</MenuItem>
+          <MenuItem value="barras">Grafica de barras</MenuItem>
+          <MenuItem value="lineal">Grafica lineal</MenuItem>
         </Select>
       </FormControl>
     </div>

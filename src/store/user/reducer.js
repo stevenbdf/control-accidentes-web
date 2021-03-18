@@ -11,8 +11,8 @@ export const user = (state = initialState, action) => {
     case types.SET_USER_LOADING:
       return {
         ...state,
-        isLoading: action.payload
-      }
+        isLoading: action.payload,
+      };
     default:
       return state;
   }
