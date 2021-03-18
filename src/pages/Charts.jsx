@@ -101,7 +101,7 @@ const Charts = () => {
       </Modal>
 
       {/* Titulo */}
-      <div className="text-4xl font-extrabold pt-12">
+      <div className="text-4xl font-extrabold pt-6">
         Graficos
       </div>
 

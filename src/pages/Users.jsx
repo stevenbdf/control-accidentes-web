@@ -86,7 +86,7 @@ const Users = () => {
           </div>
         </div>
       </Modal>
-      <div className="text-4xl font-extrabold pt-12">
+      <div className="text-4xl font-extrabold pt-6">
         Usuarios
       </div>
       <div className="flex justify-end mt-16">

@@ -34,7 +34,7 @@ const Media = () => {
           }}>Aceptar</button>
         </div>
       </Modal>
-      <div className="text-4xl font-extrabold pt-12">
+      <div className="text-4xl font-extrabold pt-6">
         Multimedia
       </div>
       <div className="w-full border-2 border-blue-400 mt-10 rounded-lg">

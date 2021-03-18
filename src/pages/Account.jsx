@@ -4,7 +4,7 @@ import { faSave } from '@fortawesome/free-solid-svg-icons'
 const Account = () => {
   return (
     <div className="mx-16">
-      <div className="text-4xl font-extrabold pt-12 mb-10">
+      <div className="text-4xl font-extrabold pt-6 mb-10">
         Cuenta
       </div>
       <div className="border-2 border-blue-500 rounded-lg py-8 space-y-8 mb-8">
