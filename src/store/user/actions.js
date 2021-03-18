@@ -10,11 +10,11 @@ export const setUserLoading = (payload) => async (dispatch) => {
   });
 };
 
-export const login = () => async (dispatch) => {
+export const login = ({ username, password, remember }) => async (dispatch) => {
   try {
     dispatch(setUserLoading(true));
-    const { data: { data } } = await AuthService.login({ username: 'admins', password: 'password', remember: false });
-    TokenService.setToken(data.token, true);
+    const { data: { data } } = await AuthService.login({ username, password, remember });
+    TokenService.setToken(data.token, remember);
     HttpService.setAuthorizationHeader(data.token);
     HttpService.mount401Interceptor();
 
