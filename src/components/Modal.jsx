@@ -13,10 +13,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function TransitionsModal({ open, setOpen, children }) {
+export default function TransitionsModal({
+  open, setOpen, children, closeCallback,
+}) {
   const classes = useStyles();
 
   const handleClose = () => {
+    closeCallback();
     setOpen(false);
   };
 
@@ -42,8 +45,13 @@ export default function TransitionsModal({ open, setOpen, children }) {
   );
 }
 
+TransitionsModal.defaultProps = {
+  closeCallback: () => { },
+};
+
 TransitionsModal.propTypes = {
   open: Proptypes.bool.isRequired,
   setOpen: Proptypes.func.isRequired,
   children: Proptypes.node.isRequired,
+  closeCallback: Proptypes.func,
 };

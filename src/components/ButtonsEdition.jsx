@@ -2,19 +2,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPencilAlt, faEye } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
-const Buttons = ({ showEye }) => (
+const Buttons = ({ showEye, editOnClick, deleteOnClick }) => (
   <div className="flex justify-center space-x-3">
     <button
       type="button"
-      className="bg-red-500 w-10 h-10 rounded-xl text-white focus:outline-none font-bold"
+      className="bg-yellow-500 w-10 h-10 rounded-xl text-black focus:outline-none font-bold"
+      onClick={editOnClick}
     >
-      <FontAwesomeIcon icon={faTrash} />
+      <FontAwesomeIcon icon={faPencilAlt} />
     </button>
     <button
       type="button"
-      className="bg-yellow-500 w-10 h-10 rounded-xl text-black focus:outline-none font-bold"
+      className="bg-red-500 w-10 h-10 rounded-xl text-white focus:outline-none font-bold"
+      onClick={deleteOnClick}
     >
-      <FontAwesomeIcon icon={faPencilAlt} />
+      <FontAwesomeIcon icon={faTrash} />
     </button>
     {
       showEye
@@ -32,6 +34,8 @@ const Buttons = ({ showEye }) => (
 
 Buttons.propTypes = {
   showEye: PropTypes.bool,
+  editOnClick: PropTypes.func.isRequired,
+  deleteOnClick: PropTypes.func.isRequired,
 };
 
 Buttons.defaultProps = {

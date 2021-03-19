@@ -20,17 +20,19 @@ const useStyles = makeStyles({
   },
 });
 
-const CustomTable = ({ rows: propRows, columns: propColumns, showEditionButtons }) => {
+const CustomTable = ({
+  rows: propRows, columns: propColumns, showEditionButtons, editButtonCallback, deleteButtonCallback,
+}) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   let rows = propRows;
   let columns = propColumns;
 
   if (showEditionButtons) {
     rows = propRows.map((row) => ({
       ...row,
-      edition: <Buttons />,
+      edition: <Buttons editOnClick={() => editButtonCallback(row.id)} deleteOnClick={() => deleteButtonCallback(row.id)} />,
     }));
 
     if (!columns.find((column) => column.id === 'edition')) {
@@ -89,6 +91,10 @@ const CustomTable = ({ rows: propRows, columns: propColumns, showEditionButtons 
         </Table>
       </TableContainer>
       <TablePagination
+        labelRowsPerPage="Registros por página"
+        labelDisplayedRows={({ from, to, count }) => `${from}-${to} de ${count !== -1 ? count : `más de ${to}`} `}
+        backIconButtonText="Pagina anterior"
+        nextIconButtonText="Siguiente pagina"
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
         count={rows.length}
@@ -103,6 +109,8 @@ const CustomTable = ({ rows: propRows, columns: propColumns, showEditionButtons 
 
 CustomTable.defaultProps = {
   showEditionButtons: true,
+  editButtonCallback: () => { console.log('TODO'); },
+  deleteButtonCallback: () => { console.log('TODO'); },
 };
 
 CustomTable.propTypes = {
@@ -114,6 +122,8 @@ CustomTable.propTypes = {
     minWidth: PropTypes.number.isRequired,
   })).isRequired,
   showEditionButtons: PropTypes.bool,
+  editButtonCallback: PropTypes.func,
+  deleteButtonCallback: PropTypes.func,
 };
 
 export default CustomTable;

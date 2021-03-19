@@ -18,6 +18,11 @@ export const user = (state = initialState, action) => {
         ...state,
         user: action.payload,
       };
+    case types.SET_USERS:
+      return {
+        ...state,
+        users: action.payload,
+      };
     default:
       return state;
   }
