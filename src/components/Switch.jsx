@@ -1,15 +1,9 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
-export default function SwitchLabels() {
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-    checkedC: true,
-  });
-
+export default function SwitchLabels({ state, setState }) {
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
@@ -25,7 +19,7 @@ export default function SwitchLabels() {
             color="primary"
           />
         )}
-        label="Graficos"
+        label="Resumen general"
       />
       <FormControlLabel
         control={(
@@ -52,3 +46,8 @@ export default function SwitchLabels() {
     </FormGroup>
   );
 }
+
+SwitchLabels.propTypes = {
+  state: PropTypes.instanceOf(Object).isRequired,
+  setState: PropTypes.func.isRequired,
+};

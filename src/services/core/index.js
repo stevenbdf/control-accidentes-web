@@ -8,5 +8,4 @@ const token = TokenService.getToken();
 
 if (token) {
   HttpService.setAuthorizationHeader(token);
-  HttpService.mount401Interceptor();
 }

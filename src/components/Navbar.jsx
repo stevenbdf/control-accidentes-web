@@ -4,6 +4,7 @@ import {
   faBars, faChartBar, faCog, faImage, faPowerOff, faUser, faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
+import { logout } from '../store/user/actions';
 
 export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -78,7 +79,7 @@ export default function Navbar() {
                   </div>
                 </li>
               </NavLink>
-              <NavLink to="/login">
+              <button type="button" className="focus:outline-none" onClick={logout}>
                 <li className="nav-item">
                   <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
                     <FontAwesomeIcon icon={faPowerOff} />
@@ -86,7 +87,7 @@ export default function Navbar() {
                     <span className="ml-2">Cerrar Sesion</span>
                   </div>
                 </li>
-              </NavLink>
+              </button>
             </ul>
           </div>
         </div>
