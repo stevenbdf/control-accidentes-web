@@ -38,7 +38,7 @@ const Config = () => {
           </div>
         </div>
       </Modal>
-      <div className="text-4xl font-extrabold pt-12">
+      <div className="text-4xl font-extrabold pt-6">
         Configuraciones
       </div>
       <div className="border-2 border-blue-400 mt-10 space-y-16 rounded-lg">
