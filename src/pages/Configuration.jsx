@@ -1,13 +1,51 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import Modal from '../components/Modal';
 import Switch from '../components/Switch';
+import { show, update } from '../store/config/actions';
 
 const Config = () => {
-  const [open, setOpen] = React.useState(false);
-  return (
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.config.isLoading);
+  const config = useSelector((state) => state.config.config);
+  const [open, setOpen] = useState(false);
 
+  const [checks, setChecks] = useState({
+    checkedA: true,
+    checkedB: true,
+    checkedC: true,
+  });
+
+  console.log({ isLoading, config });
+  useEffect(() => {
+    dispatch(show({ id: 1 }));
+  }, []);
+
+  useEffect(() => {
+    if (config?.id) {
+      setChecks({
+        checkedA: config.display_main_info,
+        checkedB: config.display_media,
+        checkedC: config.display_charts,
+      });
+    }
+  }, [config]);
+
+  const handleSectionSave = () => {
+    dispatch(update({
+      id: 1,
+      body: {
+        display_main_info: checks.checkedA,
+        display_media: checks.checkedB,
+        display_charts: checks.checkedC,
+      },
+    }));
+  };
+
+  return (
     <div className="mx-16">
       <Modal open={open} setOpen={setOpen}>
         <div className="flex justify-center items-center flex-col">
@@ -46,15 +84,22 @@ const Config = () => {
           Secciones a mostrar
         </div>
         <div className="w-full px-56">
-          <Switch />
+          {
+            isLoading
+              ? (
+                <div className="w-full flex justify-center items-center">
+                  <CircularProgress />
+                </div>
+              )
+              : <Switch state={checks} setState={setChecks} />
+          }
         </div>
         <div className="flex justify-end mr-4">
           <button
             type="button"
+            disabled={isLoading}
             className="px-4 py-2 bg-eastern-blue-500  rounded-lg mb-4 focus:outline-none text-white hover:text-black hover:bg-blue-400 transition-colors duration-300 "
-            onClick={() => {
-              setOpen(true);
-            }}
+            onClick={handleSectionSave}
           >
             <FontAwesomeIcon icon={faSave} className="mr-2" />
             {' '}
