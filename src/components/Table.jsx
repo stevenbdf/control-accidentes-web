@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 });
 
 const CustomTable = ({
-  rows: propRows, columns: propColumns, showEditionButtons, editButtonCallback, deleteButtonCallback, showEye,
+  rows: propRows, columns: propColumns, showEditionButtons, editButtonCallback, deleteButtonCallback, showEye, eyeButtonCallback,
 }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -36,6 +36,7 @@ const CustomTable = ({
         showEye={showEye}
         editOnClick={() => editButtonCallback(row.id)}
         deleteOnClick={() => deleteButtonCallback(row.id)}
+        eyeOnClick={() => eyeButtonCallback(row.id)}
       />,
     }));
 
@@ -83,6 +84,13 @@ const CustomTable = ({
               <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                 {columns.map((column) => {
                   const value = row[column.id];
+                  if (column.id === 'color') {
+                    return (
+                      <TableCell key={column.id} align={column.align}>
+                        <div className="w-10 h-10 mx-auto" style={{ backgroundColor: value }} />
+                      </TableCell>
+                    );
+                  }
                   return (
                     <TableCell key={column.id} align={column.align}>
                       {column.format && typeof value === 'number' ? column.format(value) : value}
@@ -116,6 +124,7 @@ CustomTable.defaultProps = {
   editButtonCallback: () => { console.log('TODO'); },
   deleteButtonCallback: () => { console.log('TODO'); },
   showEye: false,
+  eyeButtonCallback: () => { console.log('TODO'); },
 };
 
 CustomTable.propTypes = {
@@ -130,6 +139,7 @@ CustomTable.propTypes = {
   editButtonCallback: PropTypes.func,
   deleteButtonCallback: PropTypes.func,
   showEye: PropTypes.bool,
+  eyeButtonCallback: PropTypes.func,
 };
 
 export default CustomTable;

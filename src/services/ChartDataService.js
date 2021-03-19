@@ -4,18 +4,10 @@ class ChartService extends BaseService {
   /**
    * @type {string}
    */
-  apiResource = 'charts';
-
-  fetch() {
-    return this.get('/');
-  }
+  apiResource = 'chart-datas';
 
   show(id) {
     return this.get(id);
-  }
-
-  store(data) {
-    return this.post('/', data);
   }
 
   update(id, data) {
@@ -24,14 +16,6 @@ class ChartService extends BaseService {
 
   destroy(id) {
     return this.delete(id);
-  }
-
-  fetchChartDatas(id) {
-    return this.get(`${id}/chart-datas`);
-  }
-
-  storeChartDatas(id, data) {
-    return this.post(`${id}/chart-datas`, data);
   }
 }
 

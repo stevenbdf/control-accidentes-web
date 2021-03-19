@@ -1,118 +1,130 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { SketchPicker } from 'react-color';
 import Modal from '../components/Modal';
 import Table from '../components/Table';
 import {
   fetch, store, update, destroy,
-} from '../store/charts/actions';
-import { getChartName } from '../helpers/utilities';
+} from '../store/chartDatas/actions';
 import validator from '../helpers/validator';
 
 const columns = [
   {
-    id: 'name',
-    label: 'Titulo',
-    minWidth: 170,
+    id: 'x_value',
+    label: 'Clave',
     align: 'center',
+    minWidth: 170,
   },
   {
-    id: 'type',
-    label: 'Tipo de grafico',
+    id: 'y_value',
+    label: 'Valor',
+    align: 'center',
+    minWidth: 170,
+  },
+  {
+    id: 'color',
+    label: 'Color',
     align: 'center',
     minWidth: 170,
   },
 ];
 
-const Charts = () => {
+const ChartDatas = ({ chart }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
-  const isLoading = useSelector((state) => state.charts.isLoading);
-  const charts = useSelector((state) => state.charts.charts);
+  const isLoading = useSelector((state) => state.chartDatas.isLoading);
+  const chartDatas = useSelector((state) => state.chartDatas.chartDatas);
   const [open, setOpen] = useState(false);
-  const [chart, setChart] = useState({});
+  const [chartData, setChartData] = useState({});
+  const [color, setColor] = useState('#ffffff');
   const {
     register, handleSubmit, errors,
   } = useForm({
     mode: 'onChange',
   });
+  const { id: chartId } = useParams();
 
   useEffect(() => {
-    dispatch(fetch());
+    dispatch(fetch(chartId));
   }, []);
 
   const onSubmit = (data) => {
-    if (chart?.id) {
-      dispatch(update({ ...data, id: chart.id }));
+    if (chartData?.id) {
+      dispatch(update({
+        ...data, id: chartData.id, color, chartId,
+      }));
     } else {
-      dispatch(store(data));
+      dispatch(store({ ...data, color, id: chartId }));
     }
+    setColor('#ffffff');
     setOpen(false);
   };
 
   const handleDelete = (id) => {
-    dispatch(destroy({ id }));
+    dispatch(destroy({ id, chartId }));
   };
 
   const handleEdit = (id) => {
-    setChart(charts.find((item) => item.id === id));
+    const currentChartData = chartDatas.find((item) => item.id === id);
+    setChartData(currentChartData);
+    setColor(currentChartData.color);
     setOpen(true);
-  };
-
-  const handleEye = (id) => {
-    history.push(`/charts/${id}`);
   };
 
   return (
     // Contenedor
     <div className="mx-28">
-
       {/* Modal */}
-      <Modal closeCallback={() => { setChart({}); }} open={open} setOpen={setOpen}>
+      <Modal closeCallback={() => { setColor('#ffffff'); setChartData({}); }} open={open} setOpen={setOpen}>
         <h3 className="font-bold text-4xl mb-10">
-          {chart?.id ? 'Modificar' : 'Agregar'}
+          {chartData?.id ? 'Modificar' : 'Agregar'}
           {' '}
           Grafico
         </h3>
         <form className="mx-8" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-10">
             <div className=" text-xl font-semibold mb-2">
-              Nombre:
+              Clave:
             </div>
             <div>
               <input
-                name="name"
+                name="x_value"
                 ref={register({ required: validator.required })}
-                defaultValue={chart.name}
+                defaultValue={chartData.x_value}
                 className="py-2 w-full px-4 focus:outline-none border-2 border-blue-500 rounded-lg"
                 type="text"
-                placeholder="Ingrese un titulo..."
+                placeholder="Ingrese un valor"
               />
-              {errors.name && <p className="my-1 text-red-500">{errors.name.message}</p>}
+              {errors.x_value && <p className="my-1 text-red-500">{errors.x_value.message}</p>}
             </div>
           </div>
           <div className="mb-10">
-            <div className="text-xl mb-2 font-semibold">
-              Tipo de grafico:
+            <div className=" text-xl font-semibold mb-2">
+              Valor:
             </div>
             <div>
-              <select
-                name="type"
+              <input
+                name="y_value"
                 ref={register({ required: validator.required })}
-                defaultValue={chart.type}
-                className="px-2 rounded-lg border-2 border-blue-500 w-full focus:outline-none py-2"
-              >
-                <option value="line">Linear</option>
-                <option value="bar">Barra</option>
-                <option value="pie">Pastel</option>
-                <option value="doughnut">Dona</option>
-                <option value="polar">Polar</option>
-              </select>
-              {errors.type && <p className="my-1 text-red-500">{errors.type.message}</p>}
+                defaultValue={chartData.y_value}
+                className="py-2 w-full px-4 focus:outline-none border-2 border-blue-500 rounded-lg"
+                type="text"
+                placeholder="Ingrese un valor"
+              />
+              {errors.y_value && <p className="my-1 text-red-500">{errors.y_value.message}</p>}
+            </div>
+          </div>
+          <div className="mb-10">
+            <div className=" text-xl font-semibold mb-2">
+              Color:
+            </div>
+            <div className="w-full flex justify-center">
+              <SketchPicker color={color} onChangeComplete={({ hex }) => setColor(hex)} />
             </div>
           </div>
           <div className="flex justify-end">
@@ -120,7 +132,8 @@ const Charts = () => {
               type="button"
               className="bg-eastern-blue-500 text-white px-4 py-2 rounded-lg font-semibold text-lg focus:outline-none mr-6"
               onClick={() => {
-                setChart({});
+                setColor('#ffffff');
+                setChartData({});
                 setOpen(false);
               }}
             >
@@ -138,7 +151,11 @@ const Charts = () => {
 
       {/* Titulo */}
       <div className="text-4xl font-extrabold pt-6">
-        Graficos
+        Grafica :
+        {' '}
+        <span className="font-semibold">
+          {chart.name}
+        </span>
       </div>
 
       {/* Boton que despliega el modal */}
@@ -147,7 +164,7 @@ const Charts = () => {
           type="button"
           className=" px-4 py-2 bg-eastern-blue-500 rounded-lg mb-4 focus:outline-none text-white hover:text-black hover:bg-blue-400 transition-colors duration-300"
           onClick={() => {
-            setChart({});
+            setChartData({});
             setOpen(true);
           }}
         >
@@ -164,14 +181,17 @@ const Charts = () => {
         }
         <Table
           columns={columns}
-          rows={charts.map((item) => ({ ...item, type: getChartName(item.type) }))}
-          showEye
+          rows={chartDatas}
           deleteButtonCallback={handleDelete}
           editButtonCallback={handleEdit}
-          eyeButtonCallback={handleEye}
         />
       </div>
     </div>
   );
 };
-export default Charts;
+
+ChartDatas.propTypes = {
+  chart: PropTypes.instanceOf(Object).isRequired,
+};
+
+export default ChartDatas;

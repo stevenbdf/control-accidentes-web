@@ -11,10 +11,12 @@ import Login from './pages/Login';
 import Config from './pages/Configuration';
 import Media from './pages/Media';
 import Charts from './pages/Charts';
+import ChartDatas from './pages/ChartDatas';
 import Users from './pages/Users';
 import Account from './pages/Account';
 import TokenService from './services/core/TokenService';
 import PrivateRoute from './components/PrivateRoute';
+import ChartDataRoute from './components/ChartDataRoute';
 
 function App() {
   const user = useSelector((state) => state.user.user);
@@ -33,6 +35,7 @@ function App() {
           <PrivateRoute component={Config} exact path="/configuration" />
           <PrivateRoute component={Media} exact path="/media" />
           <PrivateRoute component={Charts} exact path="/charts" />
+          <ChartDataRoute component={ChartDatas} exact path="/charts/:id" />
           <PrivateRoute component={Users} exact path="/users" />
           <PrivateRoute component={Account} exact path="/account" />
         </Switch>
