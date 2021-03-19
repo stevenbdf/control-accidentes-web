@@ -1,26 +1,45 @@
-import React from 'react';
+import { useState, useEffect, createRef } from 'react';
 import Radio from '@material-ui/core/Radio';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCamera, faVideo, faImages, faUpload, faLink,
 } from '@fortawesome/free-solid-svg-icons';
+import { useSelector, useDispatch } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Modal from '../components/Modal';
+import { show, update } from '../store/config/actions';
+import FilesModal from '../components/FilesModal';
 
 const Media = () => {
-  const [selectedValue, setSelectedValue] = React.useState('a');
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.config.isLoading);
+  const config = useSelector((state) => state.config.config);
+  const [fileName, setFileName] = useState('No ha seleccionado ningun archivo');
+  const [selectedValue, setSelectedValue] = useState();
+  const [open, setOpen] = useState(false);
+  const [showFilesModal, setShowFilesModal] = useState(false);
+  const uploadInput = createRef();
 
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
+  const handleChange = (value) => {
+    if (!isLoading) {
+      setSelectedValue(value);
+      dispatch(update({ id: 1, body: { media_id: value } }));
+    }
   };
-
-  const [fileName, setFileName] = React.useState('No ha seleccionado ningun archivo');
-  const uploadInput = React.createRef();
 
   const handleFileUpload = (event) => {
     setFileName(event.target.files[0].name);
   };
 
-  const [open, setOpen] = React.useState(false);
+  useEffect(() => {
+    dispatch(show({ id: 1 }));
+  }, []);
+
+  useEffect(() => {
+    if (config?.id) {
+      setSelectedValue(config.media_id);
+    }
+  }, [config]);
 
   return (
     <div className="mx-16">
@@ -43,6 +62,14 @@ const Media = () => {
           </button>
         </div>
       </Modal>
+      <Modal open={showFilesModal} setOpen={setShowFilesModal}>
+        <FilesModal
+          mediaId={config?.media.id}
+          mediaFiles={config?.media?.files}
+          filesLimit={config?.media_id === '1' || config?.media_id === '2'}
+          closeModal={() => setShowFilesModal(false)}
+        />
+      </Modal>
       <div className="text-4xl font-extrabold pt-6">
         Multimedia
       </div>
@@ -50,47 +77,70 @@ const Media = () => {
         <div className="flex w-full mt-8">
           <div className="w-1/3 flex flex-col items-center">
             <Radio
-              checked={selectedValue === 'a'}
-              onChange={handleChange}
-              value="a"
+              checked={selectedValue === '1'}
+              disabled={isLoading}
+              onChange={({ target: { value } }) => handleChange(value)}
+              value="1"
               name="radio-button-demo"
-              inputProps={{ 'aria-label': 'A' }}
+              inputProps={{ 'aria-label': '1' }}
             />
-            <FontAwesomeIcon className=" text-9xl" icon={faCamera} />
-            <div className="pt-4 font-bold text-xl">Imagen individual</div>
+            <FontAwesomeIcon
+              onClick={() => handleChange('1')}
+              className={`${isLoading ? 'text-gray-600' : ''} cursor-pointer text-9xl`}
+              icon={faCamera}
+            />
+            <div className={`${isLoading ? 'text-gray-600' : ''} pt-4 font-bold text-xl`}>Imagen individual</div>
           </div>
           <div className="w-1/3 flex flex-col items-center">
             <Radio
-              checked={selectedValue === 'b'}
-              onChange={handleChange}
-              value="b"
+              checked={selectedValue === '2'}
+              disabled={isLoading}
+              onChange={({ target: { value } }) => handleChange(value)}
+              value="2"
               name="radio-button-demo"
-              inputProps={{ 'aria-label': 'B' }}
+              inputProps={{ 'aria-label': '2' }}
             />
-            <FontAwesomeIcon className=" text-9xl" icon={faVideo} />
-            <div className="pt-4 font-bold text-xl">Video</div>
+            <FontAwesomeIcon
+              onClick={() => handleChange('2')}
+              className={`${isLoading ? 'text-gray-600' : ''} cursor-pointer text-9xl`}
+              icon={faVideo}
+            />
+            <div className={`${isLoading ? 'text-gray-600' : ''} pt-4 font-bold text-xl`}>Video</div>
           </div>
           <div className="w-1/3 flex flex-col items-center">
             <Radio
-              checked={selectedValue === 'c'}
-              onChange={handleChange}
-              value="c"
+              checked={selectedValue === '3'}
+              disabled={isLoading}
+              onChange={({ target: { value } }) => handleChange(value)}
+              value="3"
               name="radio-button-demo"
-              inputProps={{ 'aria-label': 'C' }}
+              inputProps={{ 'aria-label': '3' }}
             />
-            <FontAwesomeIcon className=" text-9xl" icon={faImages} />
-            <div className="pt-4 font-bold text-xl">Caroussel</div>
+            <FontAwesomeIcon
+              onClick={() => handleChange('3')}
+              className={`${isLoading ? 'text-gray-600' : ''} cursor-pointer text-9xl`}
+              icon={faImages}
+            />
+            <div className={`${isLoading ? 'text-gray-600' : ''} pt-4 font-bold text-xl`}>Caroussel</div>
           </div>
         </div>
         <div className="flex justify-center my-10">
-          <button
-            type="button"
-            className="bg-eastern-blue-400 text-2xl rounded-lg font-bold
+          {
+            isLoading
+              ? <CircularProgress />
+              : (
+                <button
+                  type="button"
+                  disabled={isLoading}
+                  className="bg-eastern-blue-500 text-xl rounded-lg font-bold
           text-white focus:outline-none hover:bg-eastern-blue-800
             transition-colors duration-300 px-6 py-3"
-          >
-            Seleccionar Multimedia
-          </button>
+                  onClick={() => setShowFilesModal(true)}
+                >
+                  Seleccionar Multimedia
+                </button>
+              )
+          }
         </div>
       </div>
       <div className="w-full border-2 border-blue-400 mt-10 rounded-lg mb-12">
