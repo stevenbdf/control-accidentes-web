@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import Marquee from 'react-fast-marquee';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
@@ -5,20 +6,22 @@ import { NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Bar } from 'react-chartjs-2';
 import { show } from '../store/config/actions';
+import { fetch } from '../store/charts/actions';
 import { getTodayDate, formatDate, dateDiffInDays } from '../helpers/utilities';
 import Carousel from '../components/Carousel';
+import ChartCarousel from '../components/ChartCarousel';
 
 const Home = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.config.isLoading);
+  const isChartLoading = useSelector((state) => state.charts.isLoading);
   const config = useSelector((state) => state.config.config);
-
-  console.log(config);
+  const charts = useSelector((state) => state.charts.charts);
 
   useEffect(() => {
     dispatch(show({ id: 1 }));
+    dispatch(fetch());
   }, []);
 
   return (
@@ -82,21 +85,13 @@ const Home = () => {
                               config.media_id === '2'
                               && (
                                 <div className="w-full h-full flex items-center justify-center">
-                                  <video className="h-full" src={config.media.files[0].url} autoPlay loop>
-                                    <track
-                                      default
-                                      kind="captions"
-                                      srcLang="es"
-                                      src={config.media.files[0].url}
-                                    />
-                                    Lo sentimos, su navegador no soporta videos
-                                  </video>
+                                  <video className="h-full" src={config.media.files[0].url} autoPlay loop />
                                 </div>
                               )
                             }
                             {
                               config.media_id === '3'
-                              && <Carousel images={config.media.files.map(({ name, url }) => ({ name, url }))} />
+                              && <Carousel images={config.media?.files.map(({ name, url }) => ({ name, url }))} />
                             }
                           </div>
                         )
@@ -105,34 +100,13 @@ const Home = () => {
                         config.display_charts
                         && (
                           <div className="w-full flex items-center justify-center p-5" style={{ height: config.display_media ? '45vh' : '49.5vh' }}>
-                            <Bar
-                              data={{
-                                labels: ['a', 'b'],
-                                datasets: [
-                                  {
-                                    label: 'Bar - Set 1',
-                                    fillColor: 'rgba(220,220,220,0.5)',
-                                    strokeColor: 'rgba(220,220,220,0.8)',
-                                    highlightFill: 'rgba(220,220,220,0.75)',
-                                    highlightStroke: 'rgba(220,220,220,1)',
-                                    data: [65, 34],
-                                    backgroundColor: ['#AF32', 'blue', 'green', 'blue', 'red', 'blue'],
-                                  },
-                                ],
-                              }}
-                              options={{
-                                maintainAspectRatio: false,
-                                title: {
-                                  display: true,
-                                  text: 'Average Rainfall per month',
-                                  fontSize: 20,
-                                },
-                                legend: {
-                                  display: false,
-                                  position: 'right',
-                                },
-                              }}
-                            />
+                            {
+                              isChartLoading
+                                ? <CircularProgress />
+                                : (
+                                  <ChartCarousel data={charts} />
+                                )
+                            }
                           </div>
                         )
                       }

@@ -6,11 +6,13 @@ const CustomCarousel = ({ images, speed }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const lastIndex = images.length - 1;
-      if (currentIndex === lastIndex) {
-        setCurrentIndex(0);
-      } else {
-        setCurrentIndex(currentIndex + 1);
+      if (images.length) {
+        const lastIndex = images.length - 1;
+        if (currentIndex === lastIndex) {
+          setCurrentIndex(0);
+        } else {
+          setCurrentIndex(currentIndex + 1);
+        }
       }
     }, speed);
 
@@ -23,8 +25,8 @@ const CustomCarousel = ({ images, speed }) => {
     <div className="w-full h-full flex items-center justify-center">
       <img
         style={{ maxWidth: '100%', maxHeight: '100%' }}
-        src={images[currentIndex].url}
-        alt={images[currentIndex].name}
+        src={images[currentIndex]?.url}
+        alt={images[currentIndex]?.name}
       />
     </div>
   );
