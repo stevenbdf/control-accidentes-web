@@ -13,6 +13,18 @@ class ChartService extends BaseService {
   show(id) {
     return this.get(id);
   }
+
+  store(data) {
+    return this.post('/', data);
+  }
+
+  update(id, data) {
+    return this.put(id, data);
+  }
+
+  destroy(id) {
+    return this.delete(id);
+  }
 }
 
 export default new ChartService();

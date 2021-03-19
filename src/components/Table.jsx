@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 });
 
 const CustomTable = ({
-  rows: propRows, columns: propColumns, showEditionButtons, editButtonCallback, deleteButtonCallback,
+  rows: propRows, columns: propColumns, showEditionButtons, editButtonCallback, deleteButtonCallback, showEye,
 }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -32,7 +32,11 @@ const CustomTable = ({
   if (showEditionButtons) {
     rows = propRows.map((row) => ({
       ...row,
-      edition: <Buttons editOnClick={() => editButtonCallback(row.id)} deleteOnClick={() => deleteButtonCallback(row.id)} />,
+      edition: <Buttons
+        showEye={showEye}
+        editOnClick={() => editButtonCallback(row.id)}
+        deleteOnClick={() => deleteButtonCallback(row.id)}
+      />,
     }));
 
     if (!columns.find((column) => column.id === 'edition')) {
@@ -111,6 +115,7 @@ CustomTable.defaultProps = {
   showEditionButtons: true,
   editButtonCallback: () => { console.log('TODO'); },
   deleteButtonCallback: () => { console.log('TODO'); },
+  showEye: false,
 };
 
 CustomTable.propTypes = {
@@ -124,6 +129,7 @@ CustomTable.propTypes = {
   showEditionButtons: PropTypes.bool,
   editButtonCallback: PropTypes.func,
   deleteButtonCallback: PropTypes.func,
+  showEye: PropTypes.bool,
 };
 
 export default CustomTable;

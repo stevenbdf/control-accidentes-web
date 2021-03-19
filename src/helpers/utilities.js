@@ -89,3 +89,20 @@ export const dateDiffInDays = (a, b) => {
 
   return Math.floor((utc2 - utc1) / MS_PER_DAY);
 };
+
+export const getChartName = (chart) => {
+  switch (chart) {
+    case 'line':
+      return 'Linear';
+    case 'bar':
+      return 'Barra';
+    case 'pie':
+      return 'Pastel';
+    case 'doughnut':
+      return 'Dona';
+    case 'polar':
+      return 'Polar';
+    default:
+      return 'Tipo invalido';
+  }
+};

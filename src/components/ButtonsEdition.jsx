@@ -4,6 +4,17 @@ import PropTypes from 'prop-types';
 
 const Buttons = ({ showEye, editOnClick, deleteOnClick }) => (
   <div className="flex justify-center space-x-3">
+    {
+      showEye
+      && (
+        <button
+          type="button"
+          className="bg-blue-500 w-10 h-10 rounded-xl text-white focus:outline-none font-bold"
+        >
+          <FontAwesomeIcon icon={faEye} />
+        </button>
+      )
+    }
     <button
       type="button"
       className="bg-yellow-500 w-10 h-10 rounded-xl text-black focus:outline-none font-bold"
@@ -18,17 +29,6 @@ const Buttons = ({ showEye, editOnClick, deleteOnClick }) => (
     >
       <FontAwesomeIcon icon={faTrash} />
     </button>
-    {
-      showEye
-      && (
-        <button
-          type="button"
-          className="bg-blue-500 w-10 h-10 rounded-xl text-white focus:outline-none font-bold"
-        >
-          <FontAwesomeIcon icon={faEye} />
-        </button>
-      )
-      }
   </div>
 );
 

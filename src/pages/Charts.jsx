@@ -1,79 +1,92 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useSelector, useDispatch } from 'react-redux';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { useForm } from 'react-hook-form';
 import Modal from '../components/Modal';
 import Table from '../components/Table';
+import {
+  fetch, store, update, destroy,
+} from '../store/charts/actions';
+import { getChartName } from '../helpers/utilities';
+import validator from '../helpers/validator';
 
 const columns = [
   {
-    id: 'chartType',
-    label: 'Tipo de grafico',
-    align: 'center',
-    minWidth: 170,
-  },
-  {
-    id: 'title',
+    id: 'name',
     label: 'Titulo',
     minWidth: 170,
     align: 'center',
   },
   {
-    id: 'time',
-    label: 'Tiempo',
-    minWidth: 170,
+    id: 'type',
+    label: 'Tipo de grafico',
     align: 'center',
-  },
-];
-
-const rows = [
-  {
-    chartType: 'Pastel',
-    title: 'Grafica 1',
-    time: 3,
-  },
-  {
-    chartType: 'Barras',
-    title: 'Grafica 2',
-    time: 4,
-  },
-  {
-    chartType: 'Dona',
-    title: 'Grafica 3',
-    time: 5,
-  },
-  {
-    chartType: 'Pastel, Dona',
-    title: 'Grafica 4',
-    time: 8,
-  },
-  {
-    chartType: 'Barra, Pastel, Dona',
-    title: 'Grafica 5',
-    time: 1,
-  },
-  {
-    chartType: 'Barra, Pastel, Dona, Pastel2',
-    title: 'Grafica 5',
-    time: 6,
+    minWidth: 170,
   },
 ];
 
 const Charts = () => {
-  const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.charts.isLoading);
+  const charts = useSelector((state) => state.charts.charts);
+  const [open, setOpen] = useState(false);
+  const [chart, setChart] = useState({});
+  const {
+    register, handleSubmit, errors,
+  } = useForm({
+    mode: 'onChange',
+  });
+
+  useEffect(() => {
+    dispatch(fetch());
+  }, []);
+
+  const onSubmit = (data) => {
+    if (chart?.id) {
+      dispatch(update({ ...data, id: chart.id }));
+    } else {
+      dispatch(store(data));
+    }
+    setOpen(false);
+  };
+
+  const handleDelete = (id) => {
+    dispatch(destroy({ id }));
+  };
+
+  const handleEdit = (id) => {
+    setChart(charts.find((item) => item.id === id));
+    setOpen(true);
+  };
+
   return (
     // Contenedor
     <div className="mx-28">
 
       {/* Modal */}
-      <Modal open={open} setOpen={setOpen}>
-        <h3 className="font-bold text-4xl mb-10">Agregar Grafico</h3>
-        <div className="mx-8">
+      <Modal closeCallback={() => { setChart({}); }} open={open} setOpen={setOpen}>
+        <h3 className="font-bold text-4xl mb-10">
+          {chart?.id ? 'Modificar' : 'Agregar'}
+          {' '}
+          Grafico
+        </h3>
+        <form className="mx-8" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-10">
             <div className=" text-xl font-semibold mb-2">
               Nombre:
             </div>
             <div>
-              <input className="py-1 w-full px-4 focus:outline-none border-2 border-blue-500 rounded-lg" type="text" placeholder="Ingrese un titulo..." />
+              <input
+                name="name"
+                ref={register({ required: validator.required })}
+                defaultValue={chart.name}
+                className="py-2 w-full px-4 focus:outline-none border-2 border-blue-500 rounded-lg"
+                type="text"
+                placeholder="Ingrese un titulo..."
+              />
+              {errors.name && <p className="my-1 text-red-500">{errors.name.message}</p>}
             </div>
           </div>
           <div className="mb-10">
@@ -81,11 +94,19 @@ const Charts = () => {
               Tipo de grafico:
             </div>
             <div>
-              <select name="" id="" className="px-8 rounded-lg border-2 border-blue-500 w-full focus:outline-none py-2">
-                <option value="1">Pastel</option>
-                <option value="2">Barras</option>
-                <option value="3">Lineal</option>
+              <select
+                name="type"
+                ref={register({ required: validator.required })}
+                defaultValue={chart.type}
+                className="px-2 rounded-lg border-2 border-blue-500 w-full focus:outline-none py-2"
+              >
+                <option value="line">Linear</option>
+                <option value="bar">Barra</option>
+                <option value="pie">Pastel</option>
+                <option value="doughnut">Dona</option>
+                <option value="polar">Polar</option>
               </select>
+              {errors.type && <p className="my-1 text-red-500">{errors.type.message}</p>}
             </div>
           </div>
           <div className="flex justify-end">
@@ -93,24 +114,20 @@ const Charts = () => {
               type="button"
               className="bg-eastern-blue-500 text-white px-4 py-2 rounded-lg font-semibold text-lg focus:outline-none mr-6"
               onClick={() => {
+                setChart({});
                 setOpen(false);
               }}
             >
               Cancelar
-
             </button>
             <button
-              type="button"
+              type="submit"
               className="bg-eastern-blue-500 text-white px-4 py-2 rounded-lg font-semibold text-lg focus:outline-none"
-              onClick={() => {
-                setOpen(false);
-              }}
             >
               Aceptar
-
             </button>
           </div>
-        </div>
+        </form>
       </Modal>
 
       {/* Titulo */}
@@ -134,7 +151,17 @@ const Charts = () => {
 
       {/* Tabla de Graficos */}
       <div className="container mx-auto mt-4">
-        <Table columns={columns} rows={rows} />
+        {
+          isLoading
+          && <LinearProgress />
+        }
+        <Table
+          columns={columns}
+          rows={charts.map((item) => ({ ...item, type: getChartName(item.type) }))}
+          showEye
+          deleteButtonCallback={handleDelete}
+          editButtonCallback={handleEdit}
+        />
       </div>
     </div>
   );
