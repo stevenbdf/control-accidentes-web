@@ -1,65 +1,64 @@
-import Table from '../components/Table'
-import React from 'react'
-import Modal from '../components/Modal'
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import Modal from '../components/Modal';
+import Table from '../components/Table';
 
 const columns = [
   {
     id: 'chartType',
     label: 'Tipo de grafico',
     align: 'center',
-    minWidth: 170
+    minWidth: 170,
   },
   {
     id: 'title',
     label: 'Titulo',
     minWidth: 170,
-    align: 'center'
+    align: 'center',
   },
   {
     id: 'time',
     label: 'Tiempo',
     minWidth: 170,
-    align: 'center'
-  }
+    align: 'center',
+  },
 ];
 
 const rows = [
   {
     chartType: 'Pastel',
     title: 'Grafica 1',
-    time: 3
+    time: 3,
   },
   {
     chartType: 'Barras',
     title: 'Grafica 2',
-    time: 4
+    time: 4,
   },
   {
     chartType: 'Dona',
     title: 'Grafica 3',
-    time: 5
+    time: 5,
   },
   {
     chartType: 'Pastel, Dona',
     title: 'Grafica 4',
-    time: 8
+    time: 8,
   },
   {
     chartType: 'Barra, Pastel, Dona',
     title: 'Grafica 5',
-    time: 1
+    time: 1,
   },
   {
     chartType: 'Barra, Pastel, Dona, Pastel2',
     title: 'Grafica 5',
-    time: 6
-  }
+    time: 6,
+  },
 ];
 
 const Charts = () => {
-
   const [open, setOpen] = React.useState(false);
   return (
     // Contenedor
@@ -72,7 +71,7 @@ const Charts = () => {
           <div className="mb-10">
             <div className=" text-xl font-semibold mb-2">
               Nombre:
-          </div>
+            </div>
             <div>
               <input className="py-1 w-full px-4 focus:outline-none border-2 border-blue-500 rounded-lg" type="text" placeholder="Ingrese un titulo..." />
             </div>
@@ -81,7 +80,7 @@ const Charts = () => {
             <div className="text-xl mb-2 font-semibold">
               Tipo de grafico:
             </div>
-            <div >
+            <div>
               <select name="" id="" className="px-8 rounded-lg border-2 border-blue-500 w-full focus:outline-none py-2">
                 <option value="1">Pastel</option>
                 <option value="2">Barras</option>
@@ -90,12 +89,26 @@ const Charts = () => {
             </div>
           </div>
           <div className="flex justify-end">
-            <button className="bg-eastern-blue-500 text-white px-4 py-2 rounded-lg font-semibold text-lg focus:outline-none mr-6" onClick={() => {
-              setOpen(false)
-            }}>Cancelar</button>
-            <button className="bg-eastern-blue-500 text-white px-4 py-2 rounded-lg font-semibold text-lg focus:outline-none" onClick={() => {
-              setOpen(false)
-            }}>Aceptar</button>
+            <button
+              type="button"
+              className="bg-eastern-blue-500 text-white px-4 py-2 rounded-lg font-semibold text-lg focus:outline-none mr-6"
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
+              Cancelar
+
+            </button>
+            <button
+              type="button"
+              className="bg-eastern-blue-500 text-white px-4 py-2 rounded-lg font-semibold text-lg focus:outline-none"
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
+              Aceptar
+
+            </button>
           </div>
         </div>
       </Modal>
@@ -107,9 +120,13 @@ const Charts = () => {
 
       {/* Boton que despliega el modal */}
       <div className="flex justify-end mt-16">
-        <button className=" px-4 py-2 bg-eastern-blue-500 rounded-lg mb-4 focus:outline-none text-white hover:text-black hover:bg-blue-400 transition-colors duration-300" onClick={() => {
-          setOpen(true)
-        }}>
+        <button
+          type="button"
+          className=" px-4 py-2 bg-eastern-blue-500 rounded-lg mb-4 focus:outline-none text-white hover:text-black hover:bg-blue-400 transition-colors duration-300"
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
           <FontAwesomeIcon className="mr-2" icon={faPlus} />
           Agregar
         </button>
@@ -120,6 +137,6 @@ const Charts = () => {
         <Table columns={columns} rows={rows} />
       </div>
     </div>
-  )
-}
+  );
+};
 export default Charts;

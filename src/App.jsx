@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
-} from "react-router-dom";
-import Navbar from './components/Navbar'
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Config from './pages/Configuration'
-import Media from './pages/Media'
-import Charts from './pages/Charts'
-import Users from './pages/Users'
-import Account from './pages/Account'
+  Route,
+} from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Config from './pages/Configuration';
+import Media from './pages/Media';
+import Charts from './pages/Charts';
+import Users from './pages/Users';
+import Account from './pages/Account';
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
           <Route component={Account} exact path="/account" />
         </Switch>
       </div>
-    </Router >
+    </Router>
   );
 }
 
