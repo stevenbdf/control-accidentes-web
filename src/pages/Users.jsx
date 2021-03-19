@@ -151,6 +151,7 @@ const Users = () => {
           type="button"
           className="px-4 py-2 bg-eastern-blue-500 rounded-lg mb-4 focus:outline-none text-white hover:text-black hover:bg-blue-400 transition-colors duration-300"
           onClick={() => {
+            setUser({});
             setOpen(true);
           }}
         >
