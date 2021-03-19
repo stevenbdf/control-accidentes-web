@@ -1,5 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
 import { faSave } from '@fortawesome/free-solid-svg-icons'
+import { TwitterPicker } from 'react-color'
 
 const Account = () => {
   return (
@@ -8,25 +10,20 @@ const Account = () => {
         Cuenta
       </div>
       <div className="border-2 border-blue-500 rounded-lg py-8 space-y-8 mb-8">
-        <div className="text-xl pl-12 pt-2 font-bold">
-          Informacion general
+        <div className="text-xl pl-16 pt-2 font-bold">
+          Color de la interfaz
         </div>
-        <div className="flex justify-around">
+        <div className="flex w-full justify-start pl-40 items-center">
+          <div className="mb-4">
+            <TwitterPicker />
+          </div>
+        </div>
+        <div className="text-xl pl-16 font-bold">
+          Color del texto
+        </div>
+        <div className="flex w-full justify-start pl-40 items-center">
           <div>
-            <div className=" text-lg font-semibold mb-2">
-              Nombre:
-          </div>
-            <div>
-              <input className=" disabled:opacity-5 py-1 w-48 px-4 border-2 border-blue-500 rounded-lg focus:outline-none" type="text" placeholder="Jhon Doe"  disabled/>
-            </div>
-          </div>
-          <div>
-            <div className=" text-lg font-semibold mb-2">
-              Usuario:
-          </div>
-            <div>
-              <input className=" disabled:opacity-5 py-1 w-48 px-4 border-2 border-blue-500 rounded-lg focus:outline-none" type="text" placeholder="Usurio del usuario xd" disabled/>
-            </div>
+            <TwitterPicker />
           </div>
         </div>
       </div>
