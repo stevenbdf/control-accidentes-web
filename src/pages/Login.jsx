@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { login } from '../store/user/actions';
 import validator from '../helpers/validator';
 import TokenService from '../services/core/TokenService';
@@ -32,7 +32,7 @@ const Login = () => {
     <div className=" flex justify-center items-center">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className=" w-4/12 md:w-8/12 lg:w-6/12 xl:w-4/12 border-2 border-eastern-blue-500 rounded-2xl flex flex-col mt-20 py-28 bg-top bg-cover"
+        className=" w-4/12 md:w-8/12 lg:w-6/12 xl:w-4/12 border-2 border-eastern-blue-500 rounded-2xl flex flex-col mt-5 py-28 bg-top bg-cover"
       >
         <div className="flex justify-center text-4xl font-semibold -mt-16 mb-16">
           Control de accidentes
@@ -91,6 +91,7 @@ const Login = () => {
               )
           }
         </div>
+        <Link to="/" className="text-center mt-5 text-eastern-blue-700">Regresar a la pagina principal</Link>
       </form>
     </div>
   );
