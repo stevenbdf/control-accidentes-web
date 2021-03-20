@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 
 const TOKEN_KEY = 'token';
-const EXPIRATION_DAYS = 365;
+const EXPIRATION_DAYS = 1;
 
 export default {
 

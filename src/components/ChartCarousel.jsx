@@ -3,6 +3,7 @@ import Proptypes from 'prop-types';
 import {
   Line, Bar, Pie, Doughnut, Polar,
 } from 'react-chartjs-2';
+import 'chartjs-plugin-datalabels';
 
 const ChartCarousel = ({ data, speed }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -62,6 +63,17 @@ const ChartCarousel = ({ data, speed }) => {
                     legend: {
                       display: false,
                     },
+                    plugins: {
+                      datalabels: {
+                        font: {
+                          size: 16,
+                        },
+                        display: true,
+                        color: 'white',
+                        textStrokeWidth: 4,
+                        textStrokeColor: 'black',
+                      },
+                    },
                   }}
                 />
               )
@@ -98,6 +110,17 @@ const ChartCarousel = ({ data, speed }) => {
                     legend: {
                       display: false,
                     },
+                    plugins: {
+                      datalabels: {
+                        font: {
+                          size: 16,
+                        },
+                        display: true,
+                        color: 'white',
+                        textStrokeWidth: 4,
+                        textStrokeColor: 'black',
+                      },
+                    },
                   }}
                 />
               )
@@ -124,6 +147,17 @@ const ChartCarousel = ({ data, speed }) => {
                     },
                     legend: {
                       display: true,
+                    },
+                    plugins: {
+                      datalabels: {
+                        font: {
+                          size: 16,
+                        },
+                        display: true,
+                        color: 'white',
+                        textStrokeWidth: 4,
+                        textStrokeColor: 'black',
+                      },
                     },
                   }}
                 />
@@ -152,6 +186,17 @@ const ChartCarousel = ({ data, speed }) => {
                     legend: {
                       display: true,
                     },
+                    plugins: {
+                      datalabels: {
+                        font: {
+                          size: 16,
+                        },
+                        display: true,
+                        color: 'white',
+                        textStrokeWidth: 4,
+                        textStrokeColor: 'black',
+                      },
+                    },
                   }}
                 />
               )
@@ -178,6 +223,17 @@ const ChartCarousel = ({ data, speed }) => {
                     },
                     legend: {
                       display: true,
+                    },
+                    plugins: {
+                      datalabels: {
+                        font: {
+                          size: 16,
+                        },
+                        display: true,
+                        color: 'white',
+                        textStrokeWidth: 4,
+                        textStrokeColor: 'black',
+                      },
                     },
                   }}
                 />

@@ -20,17 +20,24 @@ const useStyles = makeStyles({
   },
 });
 
-const CustomTable = ({ rows: propRows, columns: propColumns, showEditionButtons }) => {
+const CustomTable = ({
+  rows: propRows, columns: propColumns, showEditionButtons, editButtonCallback, deleteButtonCallback, showEye, eyeButtonCallback,
+}) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   let rows = propRows;
   let columns = propColumns;
 
   if (showEditionButtons) {
     rows = propRows.map((row) => ({
       ...row,
-      edition: <Buttons />,
+      edition: <Buttons
+        showEye={showEye}
+        editOnClick={() => editButtonCallback(row.id)}
+        deleteOnClick={() => deleteButtonCallback(row.id)}
+        eyeOnClick={() => eyeButtonCallback(row.id)}
+      />,
     }));
 
     if (!columns.find((column) => column.id === 'edition')) {
@@ -77,6 +84,13 @@ const CustomTable = ({ rows: propRows, columns: propColumns, showEditionButtons 
               <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                 {columns.map((column) => {
                   const value = row[column.id];
+                  if (column.id === 'color') {
+                    return (
+                      <TableCell key={column.id} align={column.align}>
+                        <div className="w-10 h-10 mx-auto" style={{ backgroundColor: value }} />
+                      </TableCell>
+                    );
+                  }
                   return (
                     <TableCell key={column.id} align={column.align}>
                       {column.format && typeof value === 'number' ? column.format(value) : value}
@@ -89,6 +103,10 @@ const CustomTable = ({ rows: propRows, columns: propColumns, showEditionButtons 
         </Table>
       </TableContainer>
       <TablePagination
+        labelRowsPerPage="Registros por página"
+        labelDisplayedRows={({ from, to, count }) => `${from}-${to} de ${count !== -1 ? count : `más de ${to}`} `}
+        backIconButtonText="Pagina anterior"
+        nextIconButtonText="Siguiente pagina"
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
         count={rows.length}
@@ -103,6 +121,10 @@ const CustomTable = ({ rows: propRows, columns: propColumns, showEditionButtons 
 
 CustomTable.defaultProps = {
   showEditionButtons: true,
+  editButtonCallback: () => { console.log('TODO'); },
+  deleteButtonCallback: () => { console.log('TODO'); },
+  showEye: false,
+  eyeButtonCallback: () => { console.log('TODO'); },
 };
 
 CustomTable.propTypes = {
@@ -114,6 +136,10 @@ CustomTable.propTypes = {
     minWidth: PropTypes.number.isRequired,
   })).isRequired,
   showEditionButtons: PropTypes.bool,
+  editButtonCallback: PropTypes.func,
+  deleteButtonCallback: PropTypes.func,
+  showEye: PropTypes.bool,
+  eyeButtonCallback: PropTypes.func,
 };
 
 export default CustomTable;
