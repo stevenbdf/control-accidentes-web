@@ -37,7 +37,7 @@ export default function TransitionsModal({
       }}
     >
       <Fade in={open}>
-        <div className="w-4/12 bg-white p-10 focus:outline-none rounded-lg">
+        <div className="w-full md:w-3/4 lg:w-5/12 xl:w-4/12 bg-white p-10 focus:outline-none rounded-lg overflow-y-auto" style={{ maxHeight: '90vh' }}>
           {children}
         </div>
       </Fade>

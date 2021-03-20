@@ -10,7 +10,7 @@ class FileService extends BaseService {
     return this.get('/');
   }
 
-  post(data) {
+  store(data) {
     return this.post('/', data);
   }
 

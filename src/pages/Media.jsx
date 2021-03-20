@@ -9,15 +9,17 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Modal from '../components/Modal';
 import { show, update } from '../store/config/actions';
 import FilesModal from '../components/FilesModal';
+import { store } from '../store/files/actions';
 
 const Media = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.config.isLoading);
   const config = useSelector((state) => state.config.config);
-  const [fileName, setFileName] = useState('No ha seleccionado ningun archivo');
+  const [fileName] = useState('Selecciona un archivo');
   const [selectedValue, setSelectedValue] = useState();
   const [open, setOpen] = useState(false);
   const [showFilesModal, setShowFilesModal] = useState(false);
+  const [url, setUrl] = useState('');
   const uploadInput = createRef();
 
   const handleChange = (value) => {
@@ -28,7 +30,13 @@ const Media = () => {
   };
 
   const handleFileUpload = (event) => {
-    setFileName(event.target.files[0].name);
+    const formData = new FormData();
+    formData.append('file', event.target.files[0]);
+    dispatch(store(formData));
+  };
+
+  const handleUploadURL = () => {
+    dispatch(store({ url }));
   };
 
   useEffect(() => {
@@ -47,7 +55,13 @@ const Media = () => {
         <h3 className="font-bold text-2xl mb-5">Subir URL</h3>
         <div className="flex items-center mb-5">
           <div className="mr-5">URL:</div>
-          <input className="w-full px-4 py-2 border-2 border-blue-500 rounded-lg" type="text" placeholder="Ingrese una URL..." />
+          <input
+            value={url}
+            onChange={({ target: { value } }) => setUrl(value)}
+            className="w-full px-4 py-2 border-2 border-blue-500 rounded-lg"
+            type="text"
+            placeholder="Ingrese una URL..."
+          />
         </div>
         <div className="flex justify-end">
           <button
@@ -55,6 +69,7 @@ const Media = () => {
             className="bg-green-400 px-4 py-2 rounded-lg font-semibold text-lg focus:outline-none"
             onClick={() => {
               setOpen(false);
+              handleUploadURL();
             }}
           >
             Aceptar
@@ -64,7 +79,7 @@ const Media = () => {
       </Modal>
       <Modal open={showFilesModal} setOpen={setShowFilesModal}>
         <FilesModal
-          mediaId={config?.media.id}
+          mediaId={config?.media?.id}
           mediaFiles={config?.media?.files}
           filesLimit={config?.media_id === '1' || config?.media_id === '2'}
           closeModal={() => setShowFilesModal(false)}
@@ -74,6 +89,9 @@ const Media = () => {
         Multimedia
       </div>
       <div className="w-full border-2 border-blue-400 mt-10 rounded-lg">
+        <div className="text-xl pl-12 pt-4 font-bold">
+          Selecciona el tipo de multimedia a mostrar
+        </div>
         <div className="flex w-full mt-8">
           <div className="w-1/3 flex flex-col items-center">
             <Radio
@@ -173,6 +191,7 @@ const Media = () => {
                 type="button"
                 className="focus:outline-none"
                 onClick={() => {
+                  setUrl('');
                   setOpen(true);
                 }}
               >

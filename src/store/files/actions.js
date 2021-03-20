@@ -27,6 +27,7 @@ export const fetch = () => async (dispatch) => {
 export const store = (body) => async (dispatch) => {
   try {
     dispatch(setFileLoading(true));
+    console.log(body);
     const { data: { data } } = await FileService.store(body);
     if (data) {
       dispatch(fetch());

@@ -33,46 +33,46 @@ export default function Navbar() {
             }
             id="example-navbar-danger"
           >
-            <ul className="flex flex-col xl:flex-row list-none lg:ml-auto space-x-6">
-              <NavLink to="/configuration">
+            <ul className="flex flex-col xl:flex-row list-none xl:ml-auto xl:space-x-6">
+              <NavLink to="/configuration" activeClassName="bg-eastern-blue-400" className="rounded">
                 <li className="nav-item">
-                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
+                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white rounded hover:bg-eastern-blue-400">
                     <FontAwesomeIcon icon={faCog} />
                     <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75" />
                     <span className="ml-2">Configuraciones</span>
                   </div>
                 </li>
               </NavLink>
-              <NavLink to="/media">
+              <NavLink to="/media" activeClassName="bg-eastern-blue-400" className="rounded">
                 <li className="nav-item">
-                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
+                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white rounded hover:bg-eastern-blue-400">
                     <FontAwesomeIcon icon={faImage} />
                     <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75" />
                     <span className="ml-2">Multimedia</span>
                   </div>
                 </li>
               </NavLink>
-              <NavLink to="/charts">
+              <NavLink to="/charts" activeClassName="bg-eastern-blue-400" className="rounded">
                 <li className="nav-item">
-                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
+                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white rounded hover:bg-eastern-blue-400">
                     <FontAwesomeIcon icon={faChartBar} />
                     <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75" />
                     <span className="ml-2">Graficas</span>
                   </div>
                 </li>
               </NavLink>
-              <NavLink to="/users">
+              <NavLink to="/users" activeClassName="bg-eastern-blue-400" className="rounded">
                 <li className="nav-item">
-                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
+                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white rounded hover:bg-eastern-blue-400">
                     <FontAwesomeIcon icon={faUsers} />
                     <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75" />
                     <span className="ml-2">Usuarios</span>
                   </div>
                 </li>
               </NavLink>
-              <NavLink to="/account">
+              <NavLink to="/account" activeClassName="bg-eastern-blue-400" className="rounded">
                 <li className="nav-item">
-                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
+                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white rounded hover:bg-eastern-blue-400">
                     <FontAwesomeIcon icon={faUser} />
                     <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75" />
                     <span className="ml-2">Cuenta</span>
@@ -81,7 +81,7 @@ export default function Navbar() {
               </NavLink>
               <button type="button" className="focus:outline-none" onClick={logout}>
                 <li className="nav-item">
-                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white hover:opacity-75">
+                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white rounded hover:bg-eastern-blue-400">
                     <FontAwesomeIcon icon={faPowerOff} />
                     <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75" />
                     <span className="ml-2">Cerrar Sesion</span>
