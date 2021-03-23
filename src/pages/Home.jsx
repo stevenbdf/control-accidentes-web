@@ -54,9 +54,9 @@ const Home = () => {
                       className={`${config.display_media || config.display_charts ? 'w-1/2' : 'w-full'}
                       border-2 flex flex-col justify-center space-y-16 items-center rounded-lg md:text-center py-8`}
                     >
-                      <div className="text-6xl md:text-3xl lg:text-4xl font-semibold">{getTodayDate()}</div>
-                      <div className="text-3xl md:text-lg lg:text-xl xl:text-2xl mt-8">{config.main_info_text}</div>
-                      <div className="text-9xl md:text-6xl lg:text-7xl xl:text-8xl font-bold my-16">
+                      <div className="text-6xl md:text-3xl lg:text-6xl font-semibold">{getTodayDate()}</div>
+                      <div className="text-3xl md:text-lg lg:text-4xl mt-8">{config.main_info_text}</div>
+                      <div className="text-9xl md:text-6xl lg:text-7xl xl:text-9xl font-bold my-16">
                         {
                           dateDiffInDays(new Date(`${config.last_accident}T12:00:00Z`), new Date())
                         }
