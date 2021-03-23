@@ -36,7 +36,7 @@ const Home = () => {
           <FontAwesomeIcon className="text-gray-400 text-2xl my-1 mr-4" icon={faCog} />
         </NavLink>
       </div>
-      <div className="flex items-start space-x-2 justify-center pb-5" style={{ minHeight: '92vh' }}>
+      <div className="flex space-x-2 justify-center pb-5 items-stretch" style={{ minHeight: '92vh' }}>
         {
           isLoading
             ? (
@@ -51,7 +51,8 @@ const Home = () => {
                   && (
                     <div
                       style={{ borderColor: textInterface || 'gray' }}
-                      className="w-1/2 border-2  flex flex-col justify-center space-y-16 items-center rounded-lg md:text-center py-8"
+                      className={`${config.display_media || config.display_charts ? 'w-1/2' : 'w-full'}
+                      border-2 flex flex-col justify-center space-y-16 items-center rounded-lg md:text-center py-8`}
                     >
                       <div className="text-6xl md:text-3xl lg:text-4xl font-semibold">{getTodayDate()}</div>
                       <div className="text-3xl md:text-lg lg:text-xl xl:text-2xl mt-8">{config.main_info_text}</div>
@@ -72,13 +73,15 @@ const Home = () => {
                   (config.display_media || config.display_charts)
                   && (
                     <div
-                      style={{ borderColor: textInterface || 'gray' }}
-                      className="w-1/2 h-auto border-2 flex flex-col rounded-lg"
+                      className={`${config.display_main_info ? 'w-1/2' : 'w-full'} h-auto flex flex-col items-stretch`}
                     >
                       {
                         config.display_media
                         && (
-                          <div className="w-full flex items-center justify-center" style={{ height: config.display_charts ? '45vh' : '49.5vh' }}>
+                          <div
+                            className={`w-full flex items-center justify-center border-2 rounded-lg ${config.display_charts || !config.display_main_info ? 'mb-2' : ''}`}
+                            style={{ height: config.display_charts ? '45vh' : '90vh', borderColor: textInterface || 'gray' }}
+                          >
                             {/* Static image media */}
                             {
                               config.media_id === '1'
@@ -110,7 +113,10 @@ const Home = () => {
                       {
                         config.display_charts
                         && (
-                          <div className="w-full flex items-center justify-center p-5" style={{ height: config.display_media ? '45vh' : '49.5vh' }}>
+                          <div
+                            className="w-full flex items-center justify-center border-2 rounded-lg p-5"
+                            style={{ height: config.display_media ? '45vh' : '90vh', borderColor: textInterface || 'gray' }}
+                          >
                             {
                               isChartLoading
                                 ? <CircularProgress />
