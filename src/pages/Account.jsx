@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
-import { TwitterPicker } from 'react-color';
 import { useForm } from 'react-hook-form';
+import { CompactPicker } from 'react-color';
 import { update } from '../store/user/actions';
 import validator from '../helpers/validator';
+import { fireToast } from '../helpers/utilities';
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,15 @@ const Account = () => {
   } = useForm({
     mode: 'onChange',
   });
+  const backgroundInterface = localStorage.getItem('backgroundInterface');
+  const textInterface = localStorage.getItem('textInterface');
+  const backgroundMarquee = localStorage.getItem('backgroundMarquee');
+  const textMarquee = localStorage.getItem('textMarquee');
+
+  const [bgColorInterface, setBgColorInterface] = useState(backgroundInterface || '');
+  const [textColorInterface, setTextColorInterface] = useState(textInterface || '');
+  const [bgColorMarquee, setBgColorMarquee] = useState(backgroundMarquee || '');
+  const [textColorMarquee, setTextColorMarquee] = useState(textMarquee || '');
 
   const onSubmit = (data) => {
     dispatch(update({ ...data, id }));
@@ -27,21 +37,57 @@ const Account = () => {
         <div className="text-4xl font-extrabold pt-6 mb-10">
           Cuenta
         </div>
-        <div className="border-2 border-blue-500 rounded-lg py-8 space-y-8 mb-8">
-          <div className="text-xl pl-16 pt-2 font-bold">
-            Color de la interfaz
-          </div>
-          <div className="flex w-full justify-start pl-40 items-center">
-            <div className="mb-4">
-              <TwitterPicker />
+        <div className="border-2 flex flex-wrap border-blue-500 rounded-lg p-8 mb-5">
+          <div className="w-1/2">
+            <div className="text-xl pl-12 pt-2 font-bold flex flex-wrap items-center">
+              <p className="my-3 w-full">Color fondo interfaz</p>
+              <CompactPicker
+                color={bgColorInterface}
+                onChange={(color) => {
+                  setBgColorInterface(color.hex);
+                  localStorage.setItem('backgroundInterface', color.hex);
+                  fireToast('success', 'Color modificado correctamente');
+                }}
+              />
             </div>
           </div>
-          <div className="text-xl pl-16 font-bold">
-            Color del texto
+          <div className="w-1/2">
+            <div className="text-xl pl-12 pt-2 font-bold flex flex-wrap items-center">
+              <p className="my-3 w-full">Color texto interfaz</p>
+              <CompactPicker
+                color={textColorInterface}
+                onChange={(color) => {
+                  setTextColorInterface(color.hex);
+                  localStorage.setItem('textInterface', color.hex);
+                  fireToast('success', 'Color modificado correctamente');
+                }}
+              />
+            </div>
           </div>
-          <div className="flex w-full justify-start pl-40 items-center">
-            <div>
-              <TwitterPicker />
+          <div className="w-1/2">
+            <div className="text-xl pl-12 pt-2 font-bold flex flex-wrap items-center">
+              <p className="my-3 w-full">Color fondo marquesina</p>
+              <CompactPicker
+                color={bgColorMarquee}
+                onChange={(color) => {
+                  setBgColorMarquee(color.hex);
+                  localStorage.setItem('backgroundMarquee', color.hex);
+                  fireToast('success', 'Color modificado correctamente');
+                }}
+              />
+            </div>
+          </div>
+          <div className="w-1/2">
+            <div className="text-xl pl-12 pt-2 font-bold flex flex-wrap items-center">
+              <p className="my-3 w-full">Color texto marquesina</p>
+              <CompactPicker
+                color={textColorMarquee}
+                onChange={(color) => {
+                  setTextColorMarquee(color.hex);
+                  localStorage.setItem('textMarquee', color.hex);
+                  fireToast('success', 'Color modificado correctamente');
+                }}
+              />
             </div>
           </div>
         </div>

@@ -19,13 +19,18 @@ const Home = () => {
   const config = useSelector((state) => state.config.config);
   const charts = useSelector((state) => state.charts.charts);
 
+  const backgroundInterface = localStorage.getItem('backgroundInterface');
+  const textInterface = localStorage.getItem('textInterface');
+  const backgroundMarquee = localStorage.getItem('backgroundMarquee');
+  const textMarquee = localStorage.getItem('textMarquee');
+
   useEffect(() => {
     dispatch(show({ id: 1 }));
     dispatch(fetch());
   }, []);
 
   return (
-    <>
+    <div style={{ backgroundColor: backgroundInterface || 'white', color: textInterface || 'black' }}>
       <div className="w-full flex justify-end">
         <NavLink to="/configuration">
           <FontAwesomeIcon className="text-gray-400 text-2xl my-1 mr-4" icon={faCog} />
@@ -44,7 +49,10 @@ const Home = () => {
                 {
                   config.display_main_info
                   && (
-                    <div className="w-1/2 border-2 border-gray-300 flex flex-col justify-center space-y-16 items-center rounded-lg md:text-center py-8">
+                    <div
+                      style={{ borderColor: textInterface || 'gray' }}
+                      className="w-1/2 border-2  flex flex-col justify-center space-y-16 items-center rounded-lg md:text-center py-8"
+                    >
                       <div className="text-6xl md:text-3xl lg:text-4xl font-semibold">{getTodayDate()}</div>
                       <div className="text-3xl md:text-lg lg:text-xl xl:text-2xl mt-8">{config.main_info_text}</div>
                       <div className="text-9xl md:text-6xl lg:text-7xl xl:text-8xl font-bold my-16">
@@ -63,7 +71,10 @@ const Home = () => {
                 {
                   (config.display_media || config.display_charts)
                   && (
-                  <div className="w-1/2 h-auto border-2 border-gray-300 flex flex-col rounded-lg">
+                    <div
+                      style={{ borderColor: textInterface || 'gray' }}
+                      className="w-1/2 h-auto border-2 flex flex-col rounded-lg"
+                    >
                       {
                         config.display_media
                         && (
@@ -110,17 +121,24 @@ const Home = () => {
                           </div>
                         )
                       }
-                  </div>
+                    </div>
                   )
                 }
               </>
             )
         }
       </div>
-      <Marquee speed={75} style={{ height: '5vh', width: '100%' }} className="overflow-hidden w-full flex items-center bg-eastern-blue-500 text-white -mt-4 mb-0" gradient={false}>
+      <Marquee
+        speed={75}
+        style={{
+          height: '5vh', width: '100%', backgroundColor: backgroundMarquee || 'black', color: textMarquee || 'white',
+        }}
+        className="overflow-hidden w-full flex items-center -mt-4 mb-0"
+        gradient={false}
+      >
         <p style={{ width: '100vw' }} className="font-bold xl:text-2xl align-middle">{config?.marquee_text}</p>
       </Marquee>
-    </>
+    </div>
   );
 };
 

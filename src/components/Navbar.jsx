@@ -10,7 +10,7 @@ export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
     <>
-      <nav className="relative flex flex-wrap items-center px-2 py-3 navbar-expand-lg bg-eastern-blue-500 mb-3">
+      <nav className="relative flex flex-wrap items-center px-2 py-3 navbar-expand-lg bg-eastern-blue-500 pb-3">
         <div className="container mx-auto px-4 flex flex-wrap items-center">
           <div className="w-full relative flex justify-between xl:w-auto xl:static xl:block xl:justify-start">
             <NavLink to="/">
