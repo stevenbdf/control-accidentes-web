@@ -14,6 +14,7 @@ import Charts from './pages/Charts';
 import ChartDatas from './pages/ChartDatas';
 import Users from './pages/Users';
 import Account from './pages/Account';
+import About from './pages/About';
 import TokenService from './services/core/TokenService';
 import PrivateRoute from './components/PrivateRoute';
 import ChartDataRoute from './components/ChartDataRoute';
@@ -38,6 +39,7 @@ function App() {
           <ChartDataRoute component={ChartDatas} exact path="/charts/:id" />
           <PrivateRoute component={Users} exact path="/users" />
           <PrivateRoute component={Account} exact path="/account" />
+          <PrivateRoute component={About} exact path="/about" />
         </Switch>
       </div>
     </Router>

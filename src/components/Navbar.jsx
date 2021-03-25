@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faBars, faChartBar, faCog, faImage, faPowerOff, faUser, faUsers,
+  faBars, faChartBar, faCog, faImage, faPowerOff, faUser, faUsers, faInfoCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { logout } from '../store/user/actions';
@@ -76,6 +76,15 @@ export default function Navbar() {
                     <FontAwesomeIcon icon={faUser} />
                     <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75" />
                     <span className="ml-2">Cuenta</span>
+                  </div>
+                </li>
+              </NavLink>
+              <NavLink to="/about" activeClassName="bg-eastern-blue-400" className="rounded">
+                <li className="nav-item">
+                  <div className="px-3 py-2 flex items-center text-lg font-bold leading-snug text-white rounded hover:bg-eastern-blue-400">
+                    <FontAwesomeIcon icon={faInfoCircle} />
+                    <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75" />
+                    <span className="ml-2">Acerca de</span>
                   </div>
                 </li>
               </NavLink>

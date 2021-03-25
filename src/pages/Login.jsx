@@ -44,7 +44,7 @@ const Login = () => {
           <div className="mr-2 text-xl font-bold pr-72">Usuario: </div>
           <input
             name="username"
-            ref={register({ required: validator.required, maxLength: validator.maxLength(60), pattern: validator.letters })}
+            ref={register({ required: validator.required, maxLength: validator.maxLength(60) })}
             className="pr-36 pl-4 py-2 border-2 w-96 rounded-lg focus:border-blue-900 border-blue-600 focus:outline-none"
             placeholder="Usuario..."
             type="text"

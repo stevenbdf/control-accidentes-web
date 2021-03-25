@@ -83,7 +83,7 @@ const Users = () => {
               <input
                 name="username"
                 defaultValue={user.username}
-                ref={register({ required: validator.required })}
+                ref={register({ required: validator.required, maxLength: validator.maxLength(60) })}
                 autoComplete="off"
                 className="py-2 w-full px-4 focus:outline-none border-2 border-blue-500 rounded-lg"
                 type="text"

@@ -8,6 +8,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './services/core';
 import 'react-toastify/dist/ReactToastify.css';
+import 'froala-editor/css/froala_style.min.css';
+import 'froala-editor/css/froala_editor.pkgd.min.css';
 
 ReactDOM.render(
   <Provider store={store}>
