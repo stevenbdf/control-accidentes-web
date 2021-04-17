@@ -9,29 +9,9 @@ import { fireToast } from '../helpers/utilities';
 
 const Account = () => {
   const aboutDescription = localStorage.getItem('aboutDescription');
-  const aboutImage = localStorage.getItem('aboutImage');
-  const aboutImage2 = localStorage.getItem('aboutImage2');
 
   const { username } = useSelector((state) => state.user.user);
   const [description, setDescription] = useState(aboutDescription || '');
-  const [image, setImage] = useState(aboutImage || '');
-  const [image2, setImage2] = useState(aboutImage2 || '');
-
-  const getBase64 = (file) => new Promise((resolve) => {
-    let baseURL = '';
-    // Make new FileReader
-    const reader = new FileReader();
-
-    // Convert the file to base64 text
-    reader.readAsDataURL(file);
-
-    // on reader load somthing...
-    reader.onload = () => {
-      // Make a fileInfo Object
-      baseURL = reader.result;
-      resolve(baseURL);
-    };
-  });
 
   return (
     <div>
@@ -44,27 +24,9 @@ const Account = () => {
           <div style={{ height: '40vh' }} className="w-full lg:w-1/3 mb-5 flex flex-wrap justify-center">
             <img
               className="h-full"
-              src={image}
+              src="/images/informacion-1.jpg"
               alt="default"
             />
-            {
-              username === 'super_admin'
-              && (
-                <input
-                  type="file"
-                  onChange={async (event) => {
-                    getBase64(event.target.files[0])
-                      .then((result) => {
-                        setImage(result);
-                        localStorage.setItem('aboutImage', result);
-                      })
-                      .catch((err) => {
-                        console.log(err);
-                      });
-                  }}
-                />
-              )
-            }
           </div>
           {
             username === 'super_admin'
@@ -101,27 +63,9 @@ const Account = () => {
           <div style={{ height: '40vh' }} className="w-full lg:w-1/3 mb-5 flex flex-wrap justify-center">
             <img
               className="h-full"
-              src={image2}
+              src="/images/informacion-2.jpg"
               alt="default"
             />
-            {
-              username === 'super_admin'
-              && (
-              <input
-                type="file"
-                onChange={async (event) => {
-                  getBase64(event.target.files[0])
-                    .then((result) => {
-                      setImage2(result);
-                      localStorage.setItem('aboutImage2', result);
-                    })
-                    .catch((err) => {
-                      console.log(err);
-                    });
-                }}
-              />
-              )
-            }
           </div>
         </div>
       </div>
