@@ -14,7 +14,7 @@ class FileService extends BaseService {
     return this.post('/', data);
   }
 
-  delete(id) {
+  destroy(id) {
     return this.delete(id);
   }
 }

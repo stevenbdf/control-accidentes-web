@@ -33,10 +33,10 @@ const Home = () => {
     <div style={{ backgroundColor: backgroundInterface || 'white', color: textInterface || 'black' }}>
       <div className="w-full flex justify-end">
         <NavLink to="/configuration">
-          <FontAwesomeIcon className="text-gray-400 text-2xl my-1 mr-4" icon={faCog} />
+          <FontAwesomeIcon className="text-gray-400 text-2xl mr-4" icon={faCog} />
         </NavLink>
       </div>
-      <div className="flex space-x-2 justify-center pb-5 items-stretch" style={{ minHeight: '92vh' }}>
+      <div className="flex space-x-2 justify-center pb-5 items-stretch" style={{ minHeight: '90vh' }}>
         {
           isLoading
             ? (
@@ -89,8 +89,8 @@ const Home = () => {
                                 <div className="w-full h-full flex items-center justify-center">
                                   <img
                                     style={{ maxWidth: '100%', maxHeight: '100%' }}
-                                    src={config.media.files[0].url}
-                                    alt={config.media.files[0].name}
+                                    src={config.media.files[0]?.url}
+                                    alt={config.media.files[0]?.name}
                                   />
                                 </div>
                               )
@@ -99,7 +99,7 @@ const Home = () => {
                               config.media_id === '2'
                               && (
                                 <div className="w-full h-full flex items-center justify-center">
-                                  <video className="h-full" src={config.media.files[0].url} autoPlay loop />
+                                  <video className="h-full" src={config.media.files[0]?.url} autoPlay loop />
                                 </div>
                               )
                             }

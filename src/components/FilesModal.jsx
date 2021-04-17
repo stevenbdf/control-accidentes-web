@@ -6,9 +6,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faImage, faVideo, faLink,
+  faImage, faVideo, faLink, faTrash,
 } from '@fortawesome/free-solid-svg-icons';
-import { fetch } from '../store/files/actions';
+import { fetch, destroy } from '../store/files/actions';
 import { attachFilesToMedia } from '../store/config/actions';
 import { fireToast } from '../helpers/utilities';
 
@@ -55,6 +55,10 @@ const FilesModal = ({
     }
   };
 
+  const handleDelete = (id) => {
+    dispatch(destroy({ id }));
+  };
+
   return (
     <>
       <h3 className="font-bold text-2xl mb-5">Selecciona archivos</h3>
@@ -73,29 +77,32 @@ const FilesModal = ({
           <div style={{ height: '50vh' }} className="overflow-y-auto mb-5 flex flex-col">
             {
               files.map((file) => (
-                <FormControlLabel
-                  key={file.id}
-                  checked={mustBeChecked(file.id)}
-                  onChange={() => handleChange(file.id)}
-                  control={<Checkbox name={file.name} />}
-                  label={(
-                    <>
-                      {
-                        file.content_type.startsWith('image')
-                        && <FontAwesomeIcon className="mr-3" icon={faImage} />
-                      }
-                      {
-                        file.content_type.startsWith('video')
-                        && <FontAwesomeIcon className="mr-3" icon={faVideo} />
-                      }
-                      {
-                        file.content_type.startsWith('url')
-                        && <FontAwesomeIcon className="mr-3" icon={faLink} />
-                      }
-                      {file.name}
-                    </>
-                  )}
-                />
+                <div className="flex items-center justify-between">
+                  <FormControlLabel
+                    key={file.id}
+                    checked={mustBeChecked(file.id)}
+                    onChange={() => handleChange(file.id)}
+                    control={<Checkbox name={file.name} />}
+                    label={(
+                      <div>
+                        {
+                          file.content_type.startsWith('image')
+                          && <FontAwesomeIcon className="mr-3" icon={faImage} />
+                        }
+                        {
+                          file.content_type.startsWith('video')
+                          && <FontAwesomeIcon className="mr-3" icon={faVideo} />
+                        }
+                        {
+                          file.content_type.startsWith('url')
+                          && <FontAwesomeIcon className="mr-3" icon={faLink} />
+                        }
+                        {file.name}
+                      </div>
+                    )}
+                  />
+                  <FontAwesomeIcon className="text-red-500 mr-3 cursor-pointer" onClick={() => handleDelete(file.id)} icon={faTrash} />
+                </div>
               ))
             }
           </div>
