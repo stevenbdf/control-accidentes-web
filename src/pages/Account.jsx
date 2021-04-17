@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { useForm } from 'react-hook-form';
-import { CompactPicker } from 'react-color';
+import { SketchPicker } from 'react-color';
 import { update } from '../store/user/actions';
 import validator from '../helpers/validator';
 import { fireToast } from '../helpers/utilities';
@@ -38,10 +38,10 @@ const Account = () => {
           Cuenta
         </div>
         <div className="border-2 flex flex-wrap border-blue-500 rounded-lg p-8 mb-5">
-          <div className="w-1/2">
+          <div className="md:w-1/2 lg:w-1/4">
             <div className="text-xl pl-12 pt-2 font-bold flex flex-wrap items-center">
               <p className="my-3 w-full">Color fondo interfaz</p>
-              <CompactPicker
+              <SketchPicker
                 color={bgColorInterface}
                 onChange={(color) => {
                   setBgColorInterface(color.hex);
@@ -51,10 +51,10 @@ const Account = () => {
               />
             </div>
           </div>
-          <div className="w-1/2">
+          <div className="md:w-1/2 lg:w-1/4">
             <div className="text-xl pl-12 pt-2 font-bold flex flex-wrap items-center">
               <p className="my-3 w-full">Color texto interfaz</p>
-              <CompactPicker
+              <SketchPicker
                 color={textColorInterface}
                 onChange={(color) => {
                   setTextColorInterface(color.hex);
@@ -64,10 +64,10 @@ const Account = () => {
               />
             </div>
           </div>
-          <div className="w-1/2">
+          <div className="md:w-1/2 lg:w-1/4">
             <div className="text-xl pl-12 pt-2 font-bold flex flex-wrap items-center">
               <p className="my-3 w-full">Color fondo marquesina</p>
-              <CompactPicker
+              <SketchPicker
                 color={bgColorMarquee}
                 onChange={(color) => {
                   setBgColorMarquee(color.hex);
@@ -77,10 +77,10 @@ const Account = () => {
               />
             </div>
           </div>
-          <div className="w-1/2">
+          <div className="md:w-1/2 lg:w-1/4">
             <div className="text-xl pl-12 pt-2 font-bold flex flex-wrap items-center">
               <p className="my-3 w-full">Color texto marquesina</p>
-              <CompactPicker
+              <SketchPicker
                 color={textColorMarquee}
                 onChange={(color) => {
                   setTextColorMarquee(color.hex);
