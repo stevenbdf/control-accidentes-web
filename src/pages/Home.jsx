@@ -142,7 +142,7 @@ const Home = () => {
         className="overflow-hidden w-full flex items-center -mt-4 mb-0"
         gradient={false}
       >
-        <p style={{ width: '100vw' }} className="font-bold xl:text-2xl align-middle">{config?.marquee_text}</p>
+        <p style={{ width: '100vw' }} className="font-bold text-4xl align-middle">{config?.marquee_text}</p>
       </Marquee>
     </div>
   );

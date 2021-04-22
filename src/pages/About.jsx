@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import FroalaEditorComponent from 'react-froala-wysiwyg';
@@ -12,6 +12,12 @@ const Account = () => {
 
   const { username } = useSelector((state) => state.user.user);
   const [description, setDescription] = useState(aboutDescription || '');
+
+  useEffect(() => {
+    if (!aboutDescription) {
+      localStorage.setItem('aboutDescription', '<p><strong>Sistema de visualización de eventos.</strong><br><br>Desarrollado para Grupo Bimbo de El Salvador S.A. de C.V.<br><br>Por Servicios de Ingenieria e Instrumentacion Electrica.<br><br>Cesar A. Vega Naves<br>Steven B. Diaz Flores<br><br>Derechos Reservados 2021<br><br>cesar.vega@cavega.com.sv</p>');
+    }
+  }, []);
 
   return (
     <div>
@@ -60,9 +66,9 @@ const Account = () => {
                 </div>
               )
           }
-          <div style={{ height: '40vh' }} className="w-full lg:w-1/3 mb-5 flex flex-wrap justify-center">
+          <div style={{ height: '40vh' }} className="w-full lg:w-1/3 mb-5 flex items-center flex-wrap justify-center">
             <img
-              className="h-full"
+              style={{ height: '75%' }}
               src="/images/informacion-2.jpg"
               alt="default"
             />
