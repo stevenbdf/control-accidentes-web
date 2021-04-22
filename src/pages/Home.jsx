@@ -23,6 +23,10 @@ const Home = () => {
   const textInterface = localStorage.getItem('textInterface');
   const backgroundMarquee = localStorage.getItem('backgroundMarquee');
   const textMarquee = localStorage.getItem('textMarquee');
+  const backgroundInformation = localStorage.getItem('backgroundInformation');
+  const textInformation = localStorage.getItem('textInformation');
+  const backgroundChart = localStorage.getItem('backgroundChart');
+  const borderChart = localStorage.getItem('borderChart');
 
   useEffect(() => {
     dispatch(show({ id: 1 }));
@@ -30,7 +34,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div style={{ backgroundColor: backgroundInterface || 'white', color: textInterface || 'black' }}>
+    <div>
       <div className="w-full flex justify-end">
         <NavLink to="/configuration">
           <FontAwesomeIcon className="text-gray-400 text-2xl mr-4" icon={faCog} />
@@ -50,7 +54,7 @@ const Home = () => {
                   config.display_media
                   && (
                     <div
-                      style={{ borderColor: textInterface || 'gray' }}
+                      style={{ backgroundColor: backgroundInterface, borderColor: textInterface || 'black' }}
                       className={`${config.display_main_info || config.display_charts ? 'w-3/5' : 'w-full'}
                       border-2 flex flex-col justify-center items-center rounded-lg md:text-center`}
                     >
@@ -94,7 +98,12 @@ const Home = () => {
                           <div
                             className={`w-full flex flex-col  items-center justify-center border-2 rounded-lg space-y-10 md:text-center
                             ${config.display_charts || !config.display_main_info ? 'mb-2' : ''}`}
-                            style={{ height: config.display_charts ? '45vh' : '90vh', borderColor: textInterface || 'gray' }}
+                            style={{
+                              height: config.display_charts ? '45vh' : '90vh',
+                              borderColor: textInformation || 'gray',
+                              color: textInformation,
+                              backgroundColor: backgroundInformation,
+                            }}
                           >
                             <div className="text-3xl font-bold">{getTodayDate()}</div>
                             <div className="text-lg lg:text-4xl mt-8">{config.main_info_text}</div>
@@ -115,14 +124,14 @@ const Home = () => {
                         config.display_charts
                         && (
                           <div
-                            className="w-full flex items-center justify-center border-2 rounded-lg p-5"
-                            style={{ height: config.display_main_info ? '45vh' : '90vh', borderColor: textInterface || 'gray' }}
+                            className="w-full flex items-center justify-center border-2 rounded-lg p-5 bg-white"
+                            style={{ height: config.display_main_info ? '45vh' : '90vh', backgroundColor: backgroundChart, borderColor: borderChart }}
                           >
                             {
                               isChartLoading
                                 ? <CircularProgress />
                                 : (
-                                  <ChartCarousel data={charts} />
+                                  <ChartCarousel data={charts} fontColor={borderChart} />
                                 )
                             }
                           </div>

@@ -20,11 +20,19 @@ const Account = () => {
   const textInterface = localStorage.getItem('textInterface');
   const backgroundMarquee = localStorage.getItem('backgroundMarquee');
   const textMarquee = localStorage.getItem('textMarquee');
+  const backgroundInformation = localStorage.getItem('backgroundInformation');
+  const textInformation = localStorage.getItem('textInformation');
+  const backgroundChart = localStorage.getItem('backgroundChart');
+  const borderChart = localStorage.getItem('borderChart');
 
   const [bgColorInterface, setBgColorInterface] = useState(backgroundInterface || '');
   const [textColorInterface, setTextColorInterface] = useState(textInterface || '');
   const [bgColorMarquee, setBgColorMarquee] = useState(backgroundMarquee || '');
   const [textColorMarquee, setTextColorMarquee] = useState(textMarquee || '');
+  const [bgColorInformation, setBgColorInformation] = useState(backgroundInformation || '');
+  const [textColorInformation, setTextColorInformation] = useState(textInformation || '');
+  const [bgColorChart, setBgColorChart] = useState(backgroundChart || '');
+  const [borderColorChart, setBorderColorChart] = useState(borderChart || '');
 
   const onSubmit = (data) => {
     dispatch(update({ ...data, id }));
@@ -40,7 +48,7 @@ const Account = () => {
         <div className="border-2 flex flex-wrap border-blue-500 rounded-lg p-8 mb-5">
           <div className="md:w-1/2 lg:w-1/4">
             <div className="text-xl pl-12 pt-2 font-bold flex flex-wrap items-center">
-              <p className="my-3 w-full">Color fondo interfaz</p>
+              <p className="my-3 w-full">Color fondo multimedia</p>
               <SketchPicker
                 color={bgColorInterface}
                 onChange={(color) => {
@@ -53,7 +61,7 @@ const Account = () => {
           </div>
           <div className="md:w-1/2 lg:w-1/4">
             <div className="text-xl pl-12 pt-2 font-bold flex flex-wrap items-center">
-              <p className="my-3 w-full">Color texto interfaz</p>
+              <p className="my-3 w-full">Color borde multimedia</p>
               <SketchPicker
                 color={textColorInterface}
                 onChange={(color) => {
@@ -85,6 +93,58 @@ const Account = () => {
                 onChange={(color) => {
                   setTextColorMarquee(color.hex);
                   localStorage.setItem('textMarquee', color.hex);
+                  fireToast('success', 'Color modificado correctamente');
+                }}
+              />
+            </div>
+          </div>
+          <div className="md:w-1/2 lg:w-1/4">
+            <div className="text-xl pl-12 pt-2 font-bold flex flex-wrap items-center">
+              <p className="my-3 w-full">Color fondo conteo accidentes</p>
+              <SketchPicker
+                color={bgColorInformation}
+                onChange={(color) => {
+                  setBgColorInformation(color.hex);
+                  localStorage.setItem('backgroundInformation', color.hex);
+                  fireToast('success', 'Color modificado correctamente');
+                }}
+              />
+            </div>
+          </div>
+          <div className="md:w-1/2 lg:w-1/4">
+            <div className="text-xl pl-12 pt-2 font-bold flex flex-wrap items-center">
+              <p className="my-3 w-full">Color texto conteo accidentes</p>
+              <SketchPicker
+                color={textColorInformation}
+                onChange={(color) => {
+                  setTextColorInformation(color.hex);
+                  localStorage.setItem('textInformation', color.hex);
+                  fireToast('success', 'Color modificado correctamente');
+                }}
+              />
+            </div>
+          </div>
+          <div className="md:w-1/2 lg:w-1/4">
+            <div className="text-xl pl-12 pt-2 font-bold flex flex-wrap items-center">
+              <p className="my-3 w-full">Color fondo graficas</p>
+              <SketchPicker
+                color={bgColorChart}
+                onChange={(color) => {
+                  setBgColorChart(color.hex);
+                  localStorage.setItem('backgroundChart', color.hex);
+                  fireToast('success', 'Color modificado correctamente');
+                }}
+              />
+            </div>
+          </div>
+          <div className="md:w-1/2 lg:w-1/4">
+            <div className="text-xl pl-12 pt-2 font-bold flex flex-wrap items-center">
+              <p className="my-3 w-full">Color texto graficas</p>
+              <SketchPicker
+                color={borderColorChart}
+                onChange={(color) => {
+                  setBorderColorChart(color.hex);
+                  localStorage.setItem('borderChart', color.hex);
                   fireToast('success', 'Color modificado correctamente');
                 }}
               />

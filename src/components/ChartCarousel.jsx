@@ -5,7 +5,7 @@ import {
 } from 'react-chartjs-2';
 import 'chartjs-plugin-datalabels';
 
-const ChartCarousel = ({ data, speed }) => {
+const ChartCarousel = ({ data, speed, fontColor }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -59,6 +59,7 @@ const ChartCarousel = ({ data, speed }) => {
                       display: true,
                       text: data[currentIndex].name,
                       fontSize: 20,
+                      fontColor,
                     },
                     legend: {
                       display: false,
@@ -106,6 +107,7 @@ const ChartCarousel = ({ data, speed }) => {
                       display: true,
                       text: data[currentIndex].name,
                       fontSize: 20,
+                      fontColor,
                     },
                     legend: {
                       display: false,
@@ -144,6 +146,7 @@ const ChartCarousel = ({ data, speed }) => {
                       display: true,
                       text: data[currentIndex].name,
                       fontSize: 20,
+                      fontColor,
                     },
                     legend: {
                       display: true,
@@ -182,6 +185,7 @@ const ChartCarousel = ({ data, speed }) => {
                       display: true,
                       text: data[currentIndex].name,
                       fontSize: 20,
+                      fontColor,
                     },
                     legend: {
                       display: true,
@@ -220,6 +224,7 @@ const ChartCarousel = ({ data, speed }) => {
                       display: true,
                       text: data[currentIndex].name,
                       fontSize: 20,
+                      fontColor,
                     },
                     legend: {
                       display: true,
@@ -248,11 +253,13 @@ const ChartCarousel = ({ data, speed }) => {
 
 ChartCarousel.defaultProps = {
   speed: 5000,
+  fontColor: 'gray',
 };
 
 ChartCarousel.propTypes = {
   data: Proptypes.instanceOf(Array).isRequired,
   speed: Proptypes.number,
+  fontColor: Proptypes.string,
 };
 
 export default ChartCarousel;
