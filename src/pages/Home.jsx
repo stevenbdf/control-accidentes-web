@@ -36,7 +36,7 @@ const Home = () => {
           <FontAwesomeIcon className="text-gray-400 text-2xl mr-4" icon={faCog} />
         </NavLink>
       </div>
-      <div className="flex space-x-2 justify-center pb-5 items-stretch" style={{ minHeight: '90vh' }}>
+      <div className="flex space-x-2 justify-center pb-5 items-stretch" style={{ minHeight: '90vh', maxHeight: '93vh' }}>
         {
           isLoading
             ? (
@@ -47,66 +47,67 @@ const Home = () => {
             : (
               <>
                 {
-                  config.display_main_info
+                  config.display_media
                   && (
                     <div
                       style={{ borderColor: textInterface || 'gray' }}
-                      className={`${config.display_media || config.display_charts ? 'w-1/2' : 'w-full'}
-                      border-2 flex flex-col justify-center space-y-16 items-center rounded-lg md:text-center py-8`}
+                      className={`${config.display_main_info || config.display_charts ? 'w-3/5' : 'w-full'}
+                      border-2 flex flex-col justify-center items-center rounded-lg md:text-center`}
                     >
-                      <div className="text-6xl md:text-3xl lg:text-6xl font-semibold">{getTodayDate()}</div>
-                      <div className="text-3xl md:text-lg lg:text-4xl mt-8">{config.main_info_text}</div>
-                      <div className="text-9xl md:text-6xl lg:text-7xl xl:text-9xl font-bold my-16">
-                        {
-                          dateDiffInDays(new Date(`${config.last_accident}T12:00:00Z`), new Date())
-                        }
-                      </div>
-                      <div className="text-5xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold">
-                        Desde
-                        {' '}
-                        {formatDate(new Date(`${config.last_accident}T12:00:00Z`))}
-                      </div>
+                      {/* Static image media */}
+                      {
+                        config.media_id === '1'
+                        && (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <img
+                              style={{ maxWidth: '100%', maxHeight: '100%' }}
+                              src={config.media.files[0]?.url}
+                              alt={config.media.files[0]?.name}
+                            />
+                          </div>
+                        )
+                      }
+                      {
+                        config.media_id === '2'
+                        && (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <video className="h-full" src={config.media.files[0]?.url} autoPlay loop />
+                          </div>
+                        )
+                      }
+                      {
+                        config.media_id === '3'
+                        && <Carousel images={config.media?.files.map(({ name, url }) => ({ name, url }))} />
+                      }
                     </div>
                   )
                 }
                 {
-                  (config.display_media || config.display_charts)
+                  (config.display_main_info || config.display_charts)
                   && (
                     <div
-                      className={`${config.display_main_info ? 'w-1/2' : 'w-full'} h-auto flex flex-col items-stretch`}
+                      className={`${config.display_media ? 'w-2/5' : 'w-full'} h-auto flex flex-col items-stretch`}
                     >
                       {
-                        config.display_media
+                        config.display_main_info
                         && (
                           <div
-                            className={`w-full flex items-center justify-center border-2 rounded-lg ${config.display_charts || !config.display_main_info ? 'mb-2' : ''}`}
+                            className={`w-full flex flex-col  items-center justify-center border-2 rounded-lg space-y-10 md:text-center
+                            ${config.display_charts || !config.display_main_info ? 'mb-2' : ''}`}
                             style={{ height: config.display_charts ? '45vh' : '90vh', borderColor: textInterface || 'gray' }}
                           >
-                            {/* Static image media */}
-                            {
-                              config.media_id === '1'
-                              && (
-                                <div className="w-full h-full flex items-center justify-center">
-                                  <img
-                                    style={{ maxWidth: '100%', maxHeight: '100%' }}
-                                    src={config.media.files[0]?.url}
-                                    alt={config.media.files[0]?.name}
-                                  />
-                                </div>
-                              )
-                            }
-                            {
-                              config.media_id === '2'
-                              && (
-                                <div className="w-full h-full flex items-center justify-center">
-                                  <video className="h-full" src={config.media.files[0]?.url} autoPlay loop />
-                                </div>
-                              )
-                            }
-                            {
-                              config.media_id === '3'
-                              && <Carousel images={config.media?.files.map(({ name, url }) => ({ name, url }))} />
-                            }
+                            <div className="text-3xl font-bold">{getTodayDate()}</div>
+                            <div className="text-lg lg:text-4xl mt-8">{config.main_info_text}</div>
+                            <div className="text-6xl lg:text-7xl font-bold my-16">
+                              {
+                                dateDiffInDays(new Date(`${config.last_accident}T12:00:00Z`), new Date())
+                              }
+                            </div>
+                            <div className="text-2xl lg:text-3xl xl:text-4xl font-semibold">
+                              Desde
+                              {' '}
+                              {formatDate(new Date(`${config.last_accident}T12:00:00Z`))}
+                            </div>
                           </div>
                         )
                       }
@@ -115,7 +116,7 @@ const Home = () => {
                         && (
                           <div
                             className="w-full flex items-center justify-center border-2 rounded-lg p-5"
-                            style={{ height: config.display_media ? '45vh' : '90vh', borderColor: textInterface || 'gray' }}
+                            style={{ height: config.display_main_info ? '45vh' : '90vh', borderColor: textInterface || 'gray' }}
                           >
                             {
                               isChartLoading
