@@ -27,6 +27,8 @@ const Home = () => {
   const textInformation = localStorage.getItem('textInformation');
   const backgroundChart = localStorage.getItem('backgroundChart');
   const borderChart = localStorage.getItem('borderChart');
+  const showBgImage = JSON.parse(localStorage.getItem('showBgImage'));
+  const infoBackgroundImage = localStorage.getItem('infoBackgroundImage');
 
   useEffect(() => {
     dispatch(show({ id: 1 }));
@@ -102,7 +104,9 @@ const Home = () => {
                               height: config.display_charts ? '45vh' : '90vh',
                               borderColor: textInformation || 'gray',
                               color: textInformation,
-                              backgroundColor: backgroundInformation,
+                              backgroundImage: showBgImage ? `url(${infoBackgroundImage})` : undefined,
+                              backgroundSize: 'cover',
+                              backgroundColor: showBgImage ? undefined : backgroundInformation,
                             }}
                           >
                             <div className="text-3xl font-bold">{getTodayDate()}</div>

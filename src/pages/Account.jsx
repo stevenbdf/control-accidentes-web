@@ -25,6 +25,10 @@ const Account = () => {
   const backgroundChart = localStorage.getItem('backgroundChart');
   const borderChart = localStorage.getItem('borderChart');
 
+  const showBgImage = JSON.parse(localStorage.getItem('showBgImage'));
+
+  const infoBackgroundImage = localStorage.getItem('infoBackgroundImage');
+
   const [bgColorInterface, setBgColorInterface] = useState(backgroundInterface || '');
   const [textColorInterface, setTextColorInterface] = useState(textInterface || '');
   const [bgColorMarquee, setBgColorMarquee] = useState(backgroundMarquee || '');
@@ -34,10 +38,30 @@ const Account = () => {
   const [bgColorChart, setBgColorChart] = useState(backgroundChart || '');
   const [borderColorChart, setBorderColorChart] = useState(borderChart || '');
 
+  const [showBgImageState, setShowBgImageState] = useState(showBgImage);
+
+  const [image, setImage] = useState(infoBackgroundImage || 'https://safetyaustraliagroup.com.au/wp-content/uploads/2019/05/image-not-found.png');
+
   const onSubmit = (data) => {
     dispatch(update({ ...data, id }));
     reset();
   };
+
+  const getBase64 = (file) => new Promise((resolve) => {
+    let baseURL = '';
+    // Make new FileReader
+    const reader = new FileReader();
+
+    // Convert the file to base64 text
+    reader.readAsDataURL(file);
+
+    // on reader load somthing...
+    reader.onload = () => {
+      // Make a fileInfo Object
+      baseURL = reader.result;
+      resolve(baseURL);
+    };
+  });
 
   return (
     <div>
@@ -152,7 +176,61 @@ const Account = () => {
           </div>
         </div>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="border-2 border-blue-500 rounded-lg py-8 space-y-8 mx-16">
+      <div className="border-2 border-blue-500 rounded-lg py-8 space-y-8 mx-16 mb-5">
+        <div className="text-xl pl-12 pt-2 font-bold">
+          <p className="mb-5">Configuración de recuadro informativo</p>
+          <p className="text-center ext-lg font-normal mb-5">Selecciona tipo de fondo a mostrar:</p>
+          <div className="text-base font-normal flex justify-center mb-5">
+            <label className="mr-20">
+              <input
+                checked={showBgImageState}
+                onChange={() => {
+                  setShowBgImageState(true);
+                  localStorage.setItem('showBgImage', true);
+                }}
+                className="mr-3"
+                type="radio"
+              />
+              Imagen
+            </label>
+            <label>
+              <input
+                checked={!showBgImageState}
+                onChange={() => {
+                  setShowBgImageState(false);
+                  localStorage.setItem('showBgImage', false);
+                }}
+                className="mr-3"
+                type="radio"
+              />
+              Color
+            </label>
+          </div>
+          {
+            showBgImageState
+            && (
+              <div className="flex flex-col items-center justify-center">
+                <p className="text-center ext-lg font-normal mb-5">Selecciona la imagen a mostrar:</p>
+                <img className="w-2/12 mb-5" src={image} alt="bg" />
+                <input
+                  type="file"
+                  onChange={async (event) => {
+                    getBase64(event.target.files[0])
+                      .then((result) => {
+                        setImage(result);
+                        localStorage.setItem('infoBackgroundImage', result);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                  }}
+                />
+              </div>
+            )
+          }
+        </div>
+      </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="border-2 border-blue-500 rounded-lg py-8 space-y-8 mx-16 mb-5">
         <div className="text-xl pl-12 pt-2 font-bold">
           Cambiar contraseña
         </div>
