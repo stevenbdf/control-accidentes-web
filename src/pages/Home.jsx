@@ -3,7 +3,7 @@ import Marquee from 'react-fast-marquee';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { show } from '../store/config/actions';
@@ -18,6 +18,7 @@ const Home = () => {
   const isChartLoading = useSelector((state) => state.charts.isLoading);
   const config = useSelector((state) => state.config.config);
   const charts = useSelector((state) => state.charts.charts);
+  const [isInfoLoading, setIsInfoLoading] = useState(false);
 
   const backgroundInterface = localStorage.getItem('backgroundInterface');
   const textInterface = localStorage.getItem('textInterface');
@@ -33,6 +34,12 @@ const Home = () => {
   useEffect(() => {
     dispatch(show({ id: 1 }));
     dispatch(fetch());
+    setInterval(() => {
+      setIsInfoLoading(true);
+      setTimeout(() => {
+        setIsInfoLoading(false);
+      });
+    }, 600000);
   }, []);
 
   return (
@@ -109,18 +116,25 @@ const Home = () => {
                               backgroundColor: showBgImage ? undefined : backgroundInformation,
                             }}
                           >
-                            <div className="text-3xl font-bold">{getTodayDate()}</div>
-                            <div className="text-lg lg:text-4xl mt-8">{config.main_info_text}</div>
-                            <div className="text-6xl lg:text-7xl font-bold my-16">
-                              {
-                                dateDiffInDays(new Date(`${config.last_accident}T12:00:00Z`), new Date())
-                              }
-                            </div>
-                            <div className="text-2xl lg:text-3xl xl:text-4xl font-semibold">
-                              Desde
-                              {' '}
-                              {formatDate(new Date(`${config.last_accident}T12:00:00Z`))}
-                            </div>
+                            {
+                              !isInfoLoading
+                              && (
+                                <>
+                                  <div className="text-3xl font-bold">{getTodayDate()}</div>
+                                  <div className="text-lg lg:text-4xl mt-8">{config.main_info_text}</div>
+                                  <div className="text-6xl lg:text-7xl font-bold my-16">
+                                    {
+                                      dateDiffInDays(new Date(`${config.last_accident}T12:00:00Z`), new Date())
+                                    }
+                                  </div>
+                                  <div className="text-2xl lg:text-3xl xl:text-4xl font-semibold">
+                                    Desde
+                                    {' '}
+                                    {formatDate(new Date(`${config.last_accident}T12:00:00Z`))}
+                                  </div>
+                                </>
+                              )
+                            }
                           </div>
                         )
                       }
