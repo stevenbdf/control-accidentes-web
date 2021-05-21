@@ -11,6 +11,7 @@ import { fetch } from '../store/charts/actions';
 import { getTodayDate, formatDate, dateDiffInDays } from '../helpers/utilities';
 import Carousel from '../components/Carousel';
 import ChartCarousel from '../components/ChartCarousel';
+import VideoCarousel from '../components/VideoCarousel';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -83,9 +84,7 @@ const Home = () => {
                       {
                         config.media_id === '2'
                         && (
-                          <div className="w-full h-full flex items-center justify-center">
-                            <video className="h-full" src={config.media.files[0]?.url} autoPlay loop />
-                          </div>
+                          <VideoCarousel videos={config.media?.files.map(({ url }) => url)} />
                         )
                       }
                       {

@@ -81,7 +81,7 @@ const Media = () => {
         <FilesModal
           mediaId={config?.media?.id}
           mediaFiles={config?.media?.files}
-          filesLimit={config?.media_id === '1' || config?.media_id === '2'}
+          filesLimit={config?.media_id === '1'}
           closeModal={() => setShowFilesModal(false)}
         />
       </Modal>
