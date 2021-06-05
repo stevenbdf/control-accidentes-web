@@ -59,6 +59,49 @@ const FilesModal = ({
     dispatch(destroy({ id }));
   };
 
+  const renderResources = () => {
+    const filteredFiles = files.filter((file) => {
+      switch (mediaId) {
+        case 1:
+        case 3:
+          return file.content_type.startsWith('image');
+        case 2:
+          return file.content_type.startsWith('video');
+        default:
+          return false;
+      }
+    });
+
+    return filteredFiles.map((file) => (
+      <div className="flex items-center justify-between">
+        <FormControlLabel
+          key={file.id}
+          checked={mustBeChecked(file.id)}
+          onChange={() => handleChange(file.id)}
+          control={<Checkbox name={file.name} />}
+          label={(
+            <div>
+              {
+                file.content_type.startsWith('image')
+                && <FontAwesomeIcon className="mr-3" icon={faImage} />
+              }
+              {
+                file.content_type.startsWith('video')
+                && <FontAwesomeIcon className="mr-3" icon={faVideo} />
+              }
+              {
+                file.content_type.startsWith('url')
+                && <FontAwesomeIcon className="mr-3" icon={faLink} />
+              }
+              {file.name}
+            </div>
+          )}
+        />
+        <FontAwesomeIcon className="text-red-500 mr-3 cursor-pointer" onClick={() => handleDelete(file.id)} icon={faTrash} />
+      </div>
+    ));
+  };
+
   return (
     <>
       <h3 className="font-bold text-2xl mb-5">Selecciona archivos</h3>
@@ -76,34 +119,7 @@ const FilesModal = ({
 
           <div style={{ height: '50vh' }} className="overflow-y-auto mb-5 flex flex-col">
             {
-              files.map((file) => (
-                <div className="flex items-center justify-between">
-                  <FormControlLabel
-                    key={file.id}
-                    checked={mustBeChecked(file.id)}
-                    onChange={() => handleChange(file.id)}
-                    control={<Checkbox name={file.name} />}
-                    label={(
-                      <div>
-                        {
-                          file.content_type.startsWith('image')
-                          && <FontAwesomeIcon className="mr-3" icon={faImage} />
-                        }
-                        {
-                          file.content_type.startsWith('video')
-                          && <FontAwesomeIcon className="mr-3" icon={faVideo} />
-                        }
-                        {
-                          file.content_type.startsWith('url')
-                          && <FontAwesomeIcon className="mr-3" icon={faLink} />
-                        }
-                        {file.name}
-                      </div>
-                    )}
-                  />
-                  <FontAwesomeIcon className="text-red-500 mr-3 cursor-pointer" onClick={() => handleDelete(file.id)} icon={faTrash} />
-                </div>
-              ))
+              renderResources()
             }
           </div>
         )
